@@ -1,57 +1,191 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 class="h4 mb-3">Dashboard</h2>
-<div class="row g-3">
-  <div class="col-md-4">
-    <div class="card card-stat">
-      <div class="card-body">
-        <div class="stat-title">Income (This Month)</div>
-        <div class="stat-value">₹ {{ income_this_month|round(2) }}</div>
+<div class="space-y-8">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
+      <p class="text-slate-400">Welcome back! Here's your financial overview.</p>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+        <span class="text-sm text-slate-400">This Month</span>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card card-stat">
-      <div class="card-body">
-        <div class="stat-title">Expense (This Month)</div>
-        <div class="stat-value text-danger">₹ {{ expense_this_month|round(2) }}</div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Income Card -->
+    <div class="stats-card card-hover bg-gradient-to-br from-green-900/20 to-green-800/20 border-green-500/20 rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">+12%</span>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-sm text-slate-400 font-medium">Income (This Month)</h3>
+        <p class="text-2xl font-bold text-white">₹ {{ income_this_month|round(2) }}</p>
+        <div class="flex items-center space-x-2">
+          <div class="flex-1 h-2 bg-slate-800 rounded-full">
+            <div class="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width: 75%"></div>
+          </div>
+          <span class="text-xs text-slate-400">75% of target</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card card-stat">
-      <div class="card-body">
-        <div class="stat-title">Net (This Month)</div>
-        <div class="stat-value {% if income_this_month-expense_this_month < 0 %}text-danger{% else %}text-success{% endif %}">
+
+    <!-- Expense Card -->
+    <div class="stats-card card-hover bg-gradient-to-br from-red-900/20 to-red-800/20 border-red-500/20 rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded-full">-5%</span>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-sm text-slate-400 font-medium">Expense (This Month)</h3>
+        <p class="text-2xl font-bold text-white">₹ {{ expense_this_month|round(2) }}</p>
+        <div class="flex items-center space-x-2">
+          <div class="flex-1 h-2 bg-slate-800 rounded-full">
+            <div class="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full" style="width: 60%"></div>
+          </div>
+          <span class="text-xs text-slate-400">60% of budget</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Net Card -->
+    <div class="stats-card card-hover bg-gradient-to-br from-primary-900/20 to-purple-900/20 border-primary-500/20 rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        {% if income_this_month-expense_this_month >= 0 %}
+        <span class="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">Positive</span>
+        {% else %}
+        <span class="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded-full">Negative</span>
+        {% endif %}
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-sm text-slate-400 font-medium">Net (This Month)</h3>
+        <p class="text-2xl font-bold {% if income_this_month-expense_this_month < 0 %}text-red-400{% else %}text-green-400{% endif %}">
           ₹ {{ (income_this_month - expense_this_month)|round(2) }}
+        </p>
+        <div class="flex items-center space-x-2">
+          <div class="flex-1 h-2 bg-slate-800 rounded-full">
+            <div class="h-full bg-gradient-to-r from-primary-500 to-purple-500 rounded-full" style="width: 85%"></div>
+          </div>
+          <span class="text-xs text-slate-400">85% saved</span>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="card mt-4">
-  <div class="card-body">
-    <h5 class="card-title">Monthly Expense Trend</h5>
-    <canvas id="trendChart"></canvas>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Chart Section -->
+    <div class="lg:col-span-2">
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-semibold text-white">Monthly Expense Trend</h2>
+          <div class="flex items-center space-x-2">
+            <div class="w-3 h-3 bg-primary-500 rounded-full"></div>
+            <span class="text-sm text-slate-400">Expenses</span>
+          </div>
+        </div>
+        <div class="relative h-80">
+          <canvas id="trendChart" class="w-full h-full"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Categories -->
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-white">Top Categories</h2>
+        <span class="text-sm text-slate-400">This Month</span>
+      </div>
+      
+      {% if by_category %}
+        <div class="space-y-4">
+          {% for cat, val in by_category.items() %}
+          <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center">
+                {% if cat == 'Food' %}
+                <svg class="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1 1zM4 7h12v9a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" clip-rule="evenodd"></path>
+                </svg>
+                {% elif cat == 'Transport' %}
+                <svg class="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"></path>
+                </svg>
+                {% else %}
+                <svg class="w-4 h-4 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+                </svg>
+                {% endif %}
+              </div>
+              <span class="text-white font-medium">{{ cat }}</span>
+            </div>
+            <div class="text-right">
+              <div class="text-white font-semibold">₹ {{ val|round(2) }}</div>
+              <div class="text-xs text-slate-400">25% of total</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-8">
+          <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <p class="text-slate-400 mb-4">No expenses this month yet.</p>
+          <a href="{{ url_for('add_transaction') }}" class="text-primary-400 hover:text-primary-300 font-medium">Add your first transaction →</a>
+        </div>
+      {% endif %}
+    </div>
   </div>
-</div>
 
-<div class="card mt-4">
-  <div class="card-body">
-    <h5 class="card-title">Top Categories (This Month)</h5>
-    {% if by_category %}
-      <ul class="list-group list-group-flush">
-        {% for cat, val in by_category.items() %}
-          <li class="list-group-item d-flex justify-content-between">
-            <span>{{ cat }}</span>
-            <strong>₹ {{ val|round(2) }}</strong>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="text-muted mb-0">No expenses this month yet.</p>
-    {% endif %}
+  <!-- Quick Actions -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <a href="{{ url_for('add_transaction') }}" class="bg-primary-500 hover:bg-primary-600 rounded-xl p-6 text-center group transition-all hover:scale-105">
+      <svg class="w-8 h-8 text-white mx-auto mb-3 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-white font-medium">Add Transaction</span>
+    </a>
+
+    <a href="{{ url_for('predictions') }}" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-6 text-center group transition-all hover:scale-105">
+      <svg class="w-8 h-8 text-purple-400 mx-auto mb-3 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+      </svg>
+      <span class="text-white font-medium">View Predictions</span>
+    </a>
+
+    <a href="{{ url_for('savings') }}" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-6 text-center group transition-all hover:scale-105">
+      <svg class="w-8 h-8 text-green-400 mx-auto mb-3 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-white font-medium">Savings Goals</span>
+    </a>
+
+    <a href="{{ url_for('transactions') }}" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-6 text-center group transition-all hover:scale-105">
+      <svg class="w-8 h-8 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-white font-medium">Transaction History</span>
+    </a>
   </div>
 </div>
 
@@ -67,11 +201,51 @@ if (ctx) {
       datasets: [{
         label: 'Monthly Expenses',
         data: totals,
+        borderColor: '#6366f1',
+        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#6366f1',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2,
+        pointRadius: 6,
       }]
     },
     options: {
       responsive: true,
-      scales: { y: { beginAtZero: true } }
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)',
+          },
+          ticks: {
+            color: '#94a3b8'
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)',
+          },
+          ticks: {
+            color: '#94a3b8',
+            callback: function(value) {
+              return '₹' + value.toLocaleString();
+            }
+          }
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      }
     }
   });
 }

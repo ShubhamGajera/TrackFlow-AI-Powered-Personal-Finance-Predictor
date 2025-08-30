@@ -1,14 +1,240 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="row align-items-center">
-  <div class="col-md-6">
-    <h1 class="display-5 fw-bold">Trackflow</h1>
-    <p class="lead">AI-powered personal finance predictor that helps you track expenses, forecast spending, and hit your savings goals.</p>
-    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
-    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Login</a>
+<!-- Hero Section -->
+<div class="relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0">
+    <div class="absolute top-10 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary-500/20 to-transparent"></div>
   </div>
-  <div class="col-md-6 text-center">
-    <img src="https://images.unsplash.com/photo-1567427013953-23a4d88b3b53?q=80&w=1600&auto=format&fit=crop" class="img-fluid rounded-4 shadow" alt="finance image">
+
+  <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh] py-12">
+    <!-- Left Content -->
+    <div class="space-y-8 animate-fade-up">
+      <div class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary-500/10 text-primary-400 border border-primary-500/20">
+        <span class="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+        AI-Powered Finance Tracker
+      </div>
+      
+      <h1 class="text-5xl lg:text-7xl font-black leading-tight">
+        <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+          Master Your
+        </span>
+        <br>
+        <span class="bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-glow">
+          Financial Future
+        </span>
+      </h1>
+      
+      <p class="text-xl text-slate-400 leading-relaxed max-w-lg">
+        Trackflow uses advanced AI to predict your spending patterns, track expenses intelligently, and help you achieve your savings goals faster than ever.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="{{ url_for('register') }}" class="btn-primary-glow text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center group">
+          Get Started Free
+          <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a href="{{ url_for('login') }}" class="border border-slate-600 hover:border-primary-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transition-all hover:bg-slate-800/50">
+          Sign In
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-800">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-white">99%</div>
+          <div class="text-sm text-slate-400">Prediction Accuracy</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-white">10K+</div>
+          <div class="text-sm text-slate-400">Transactions Analyzed</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-white">$50M+</div>
+          <div class="text-sm text-slate-400">Money Tracked</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Content - Dashboard Preview -->
+    <div class="relative animate-fade-up" style="animation-delay: 0.2s;">
+      <!-- Main Dashboard Card -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-lg font-semibold text-white">Monthly Overview</h3>
+          <div class="flex space-x-2">
+            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+            <div class="text-sm text-slate-400">Income</div>
+            <div class="text-xl font-bold text-green-400">₹45,230</div>
+            <div class="text-xs text-green-400">↗ +12%</div>
+          </div>
+          <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+            <div class="text-sm text-slate-400">Expenses</div>
+            <div class="text-xl font-bold text-red-400">₹28,450</div>
+            <div class="text-xs text-red-400">↘ -5%</div>
+          </div>
+        </div>
+
+        <!-- Chart Placeholder -->
+        <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm text-slate-400">Spending Trend</span>
+            <span class="text-xs text-primary-400">AI Prediction</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+              <div class="flex-1 h-2 bg-slate-800 rounded-full">
+                <div class="h-full bg-gradient-to-r from-primary-500 to-purple-500 rounded-full" style="width: 75%"></div>
+              </div>
+              <span class="text-xs text-slate-400">75%</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div class="flex-1 h-2 bg-slate-800 rounded-full">
+                <div class="h-full bg-green-500 rounded-full" style="width: 60%"></div>
+              </div>
+              <span class="text-xs text-slate-400">60%</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div class="flex-1 h-2 bg-slate-800 rounded-full">
+                <div class="h-full bg-blue-500 rounded-full" style="width: 45%"></div>
+              </div>
+              <span class="text-xs text-slate-400">45%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Elements -->
+      <div class="absolute -top-4 -right-4 bg-primary-500 rounded-lg p-3 shadow-lg animate-bounce" style="animation-delay: 1s;">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+
+      <div class="absolute -bottom-4 -left-4 bg-purple-500 rounded-lg p-3 shadow-lg animate-bounce" style="animation-delay: 1.5s;">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="py-20">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold text-white mb-4">Everything you need to manage finances</h2>
+    <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+      Powerful AI-driven features designed to make personal finance management effortless and insightful.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Smart Tracking -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">Smart Expense Tracking</h3>
+      <p class="text-slate-400">Automatically categorize and track your expenses with intelligent pattern recognition.</p>
+    </div>
+
+    <!-- AI Predictions -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">AI Predictions</h3>
+      <p class="text-slate-400">Get accurate spending forecasts and budget recommendations powered by machine learning.</p>
+    </div>
+
+    <!-- Goal Setting -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">Savings Goals</h3>
+      <p class="text-slate-400">Set personalized savings targets and track your progress with visual milestones.</p>
+    </div>
+
+    <!-- Analytics -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">Rich Analytics</h3>
+      <p class="text-slate-400">Beautiful charts and insights to understand your spending patterns and trends.</p>
+    </div>
+
+    <!-- Security -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">Bank-Level Security</h3>
+      <p class="text-slate-400">Your financial data is encrypted and protected with industry-standard security measures.</p>
+    </div>
+
+    <!-- Mobile App -->
+    <div class="card-hover bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700">
+      <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold text-white mb-3">Mobile Optimized</h3>
+      <p class="text-slate-400">Access your financial dashboard anywhere with our responsive web application.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="relative py-20">
+  <div class="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-purple-500/10 rounded-3xl"></div>
+  <div class="relative text-center">
+    <h2 class="text-4xl font-bold text-white mb-6">Ready to take control of your finances?</h2>
+    <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
+      Join thousands of users who have transformed their financial lives with Trackflow's AI-powered insights.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{{ url_for('register') }}" class="btn-primary-glow text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center group">
+        Start Free Trial
+        <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </a>
+      <a href="{{ url_for('about') }}" class="border border-slate-600 hover:border-primary-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transition-all hover:bg-slate-800/50">
+        Learn More
+      </a>
+    </div>
   </div>
 </div>
 {% endblock %}

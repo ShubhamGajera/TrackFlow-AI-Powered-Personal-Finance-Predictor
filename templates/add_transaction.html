@@ -1,49 +1,322 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 class="h4 mb-3">Add Transaction</h2>
-<div class="card">
-  <div class="card-body">
-    <form method="POST">
-      <div class="row g-3">
-        <div class="col-md-3">
-          <label class="form-label">Type</label>
-          <select name="type" class="form-select">
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-          </select>
+<div class="max-w-4xl mx-auto space-y-8">
+  <!-- Header -->
+  <div class="text-center">
+    <h1 class="text-3xl font-bold text-white mb-2">Add Transaction</h1>
+    <p class="text-slate-400">Record a new income or expense transaction</p>
+  </div>
+
+  <!-- Main Form Card -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+    <form method="POST" class="space-y-8">
+      <!-- Transaction Type Toggle -->
+      <div class="flex items-center justify-center">
+        <div class="bg-slate-800 p-1 rounded-xl border border-slate-700">
+          <div class="grid grid-cols-2 gap-1">
+            <button type="button" id="expense-btn" onclick="setTransactionType('expense')" 
+                    class="transaction-type-btn active px-6 py-3 rounded-lg font-medium transition-all">
+              <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Expense
+            </button>
+            <button type="button" id="income-btn" onclick="setTransactionType('income')" 
+                    class="transaction-type-btn px-6 py-3 rounded-lg font-medium transition-all">
+              <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              Income
+            </button>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label class="form-label">Amount</label>
-          <input type="number" step="0.01" min="0" class="form-control" name="amount" required>
+      </div>
+
+      <!-- Hidden input for transaction type -->
+      <input type="hidden" name="type" id="transaction-type" value="expense">
+
+      <!-- Form Fields Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Amount Field -->
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-slate-300 mb-2">
+            Amount *
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <span class="text-slate-400 text-lg font-medium">₹</span>
+            </div>
+            <input 
+              type="number" 
+              step="0.01" 
+              min="0" 
+              name="amount" 
+              required
+              class="input-dark w-full pl-10 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+              placeholder="0.00"
+            >
+          </div>
         </div>
-        <div class="col-md-3">
-          <label class="form-label">Category</label>
-          <select name="category" class="form-select">
-            <option>Food</option>
-            <option>Transport</option>
-            <option>Bills</option>
-            <option>Shopping</option>
-            <option>Health</option>
-            <option>Education</option>
-            <option>Entertainment</option>
-            <option>Travel</option>
-            <option>Other</option>
-          </select>
+
+        <!-- Category Field -->
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-2">
+            Category *
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <select 
+              name="category" 
+              required
+              class="input-dark w-full pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none"
+            >
+              <option value="">Select category</option>
+              <option value="Food">🍽️ Food & Dining</option>
+              <option value="Transport">🚗 Transport</option>
+              <option value="Bills">📱 Bills & Utilities</option>
+              <option value="Shopping">🛍️ Shopping</option>
+              <option value="Health">🏥 Health & Medical</option>
+              <option value="Education">📚 Education</option>
+              <option value="Entertainment">🎬 Entertainment</option>
+              <option value="Travel">✈️ Travel</option>
+              <option value="Other">📋 Other</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label class="form-label">Date</label>
-          <input type="date" class="form-control" name="date">
+
+        <!-- Date Field -->
+        <div>
+          <label class="block text-sm font-medium text-slate-300 mb-2">
+            Date
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1 1zM4 7h12v9a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <input 
+              type="date" 
+              name="date" 
+              class="input-dark w-full pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            >
+          </div>
         </div>
-        <div class="col-12">
-          <label class="form-label">Note (optional)</label>
-          <input type="text" class="form-control" name="note" placeholder="e.g., Dinner with friends">
+
+        <!-- Note Field -->
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-slate-300 mb-2">
+            Note (Optional)
+          </label>
+          <div class="relative">
+            <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+              <svg class="h-5 w-5 text-slate-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <textarea 
+              name="note" 
+              rows="3"
+              class="input-dark w-full pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+              placeholder="Add a description for this transaction..."
+            ></textarea>
+          </div>
         </div>
-        <div class="col-12">
-          <button class="btn btn-primary">Save</button>
-          <a class="btn btn-outline-secondary" href="{{ url_for('transactions') }}">View History</a>
-        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-700">
+        <button 
+          type="submit" 
+          class="btn-primary-glow flex-1 py-3 px-6 rounded-xl text-white font-semibold text-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Save Transaction
+        </button>
+        <a 
+          href="{{ url_for('transactions') }}" 
+          class="flex-1 sm:flex-none border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white py-3 px-6 rounded-xl font-semibold text-lg text-center transition-all hover:bg-slate-800/50"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+          </svg>
+          View History
+        </a>
       </div>
     </form>
   </div>
+
+  <!-- Quick Actions -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <button onclick="quickFill('Food', 500)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-4 text-center group transition-all hover:scale-105">
+      <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+        <span class="text-lg">🍽️</span>
+      </div>
+      <span class="text-white font-medium text-sm">Quick Food</span>
+      <div class="text-xs text-slate-400">₹500</div>
+    </button>
+
+    <button onclick="quickFill('Transport', 200)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-4 text-center group transition-all hover:scale-105">
+      <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+        <span class="text-lg">🚗</span>
+      </div>
+      <span class="text-white font-medium text-sm">Transport</span>
+      <div class="text-xs text-slate-400">₹200</div>
+    </button>
+
+    <button onclick="quickFill('Bills', 1500)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-4 text-center group transition-all hover:scale-105">
+      <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+        <span class="text-lg">📱</span>
+      </div>
+      <span class="text-white font-medium text-sm">Bills</span>
+      <div class="text-xs text-slate-400">₹1500</div>
+    </button>
+
+    <button onclick="quickFill('Entertainment', 800)" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl p-4 text-center group transition-all hover:scale-105">
+      <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+        <span class="text-lg">🎬</span>
+      </div>
+      <span class="text-white font-medium text-sm">Entertainment</span>
+      <div class="text-xs text-slate-400">₹800</div>
+    </button>
+  </div>
 </div>
+
+<style>
+.transaction-type-btn {
+  color: #94a3b8;
+  background: transparent;
+}
+
+.transaction-type-btn.active {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.25);
+}
+
+.transaction-type-btn:not(.active):hover {
+  color: #e2e8f0;
+  background: rgba(99, 102, 241, 0.1);
+}
+</style>
+
+<script>
+// Set today's date as default
+document.addEventListener('DOMContentLoaded', function() {
+  const dateInput = document.querySelector('input[name="date"]');
+  if (dateInput && !dateInput.value) {
+    const today = new Date();
+    const formattedDate = today.getFullYear() + '-' + 
+                         String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                         String(today.getDate()).padStart(2, '0');
+    dateInput.value = formattedDate;
+  }
+  
+  // Add focus effects to form elements
+  const inputs = document.querySelectorAll('input, select, textarea');
+  inputs.forEach(input => {
+    input.addEventListener('focus', function() {
+      this.parentElement.classList.add('ring-2', 'ring-primary-500');
+    });
+    
+    input.addEventListener('blur', function() {
+      this.parentElement.classList.remove('ring-2', 'ring-primary-500');
+    });
+  });
+});
+
+function setTransactionType(type) {
+  // Update hidden input
+  document.getElementById('transaction-type').value = type;
+  
+  // Update button states
+  const expenseBtn = document.getElementById('expense-btn');
+  const incomeBtn = document.getElementById('income-btn');
+  
+  expenseBtn.classList.remove('active');
+  incomeBtn.classList.remove('active');
+  
+  if (type === 'expense') {
+    expenseBtn.classList.add('active');
+  } else {
+    incomeBtn.classList.add('active');
+  }
+  
+  // Update category options based on type
+  updateCategoryOptions(type);
+}
+
+function updateCategoryOptions(type) {
+  const categorySelect = document.querySelector('select[name="category"]');
+  
+  if (type === 'income') {
+    categorySelect.innerHTML = `
+      <option value="">Select category</option>
+      <option value="Salary">💼 Salary</option>
+      <option value="Business">🏢 Business</option>
+      <option value="Investment">📈 Investment</option>
+      <option value="Gift">🎁 Gift</option>
+      <option value="Other">📋 Other</option>
+    `;
+  } else {
+    categorySelect.innerHTML = `
+      <option value="">Select category</option>
+      <option value="Food">🍽️ Food & Dining</option>
+      <option value="Transport">🚗 Transport</option>
+      <option value="Bills">📱 Bills & Utilities</option>
+      <option value="Shopping">🛍️ Shopping</option>
+      <option value="Health">🏥 Health & Medical</option>
+      <option value="Education">📚 Education</option>
+      <option value="Entertainment">🎬 Entertainment</option>
+      <option value="Travel">✈️ Travel</option>
+      <option value="Other">📋 Other</option>
+    `;
+  }
+}
+
+function quickFill(category, amount) {
+  document.querySelector('input[name="amount"]').value = amount;
+  document.querySelector('select[name="category"]').value = category;
+  
+  // Add a small animation to highlight the filled fields
+  const amountInput = document.querySelector('input[name="amount"]');
+  const categorySelect = document.querySelector('select[name="category"]');
+  
+  [amountInput, categorySelect].forEach(el => {
+    el.classList.add('ring-2', 'ring-green-500');
+    setTimeout(() => {
+      el.classList.remove('ring-2', 'ring-green-500');
+    }, 1000);
+  });
+}
+
+// Form validation
+document.querySelector('form').addEventListener('submit', function(e) {
+  const amount = document.querySelector('input[name="amount"]').value;
+  const category = document.querySelector('select[name="category"]').value;
+  
+  if (!amount || !category) {
+    e.preventDefault();
+    alert('Please fill in all required fields.');
+    return false;
+  }
+  
+  if (parseFloat(amount) <= 0) {
+    e.preventDefault();
+    alert('Amount must be greater than 0.');
+    return false;
+  }
+});
+</script>
 {% endblock %}

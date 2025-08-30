@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <h1 class="display-5 fw-bold">Trackflow</h1>
+    <p class="lead">AI-powered personal finance predictor that helps you track expenses, forecast spending, and hit your savings goals.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Login</a>
+  </div>
+  <div class="col-md-6 text-center">
+    <img src="https://images.unsplash.com/photo-1567427013953-23a4d88b3b53?q=80&w=1600&auto=format&fit=crop" class="img-fluid rounded-4 shadow" alt="finance image">
+  </div>
+</div>
+{% endblock %}

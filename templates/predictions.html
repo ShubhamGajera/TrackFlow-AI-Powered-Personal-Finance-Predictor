@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="h4 mb-3">Predictions</h2>
+<div class="row">
+  <div class="col-md-7">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Monthly Expense Trend</h5>
+        <canvas id="predChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Next Month Prediction</h5>
+        <p class="display-6">₹ {{ prediction.prediction|round(2) }}</p>
+        <p class="text-muted small mb-0">Method: {{ prediction.method }} — {{ prediction.note }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const months = {{ months|tojson }};
+const totals = {{ totals|tojson }};
+const ctx = document.getElementById('predChart');
+if (ctx) {
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Monthly Expenses',
+        data: totals,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+</script>
+{% endblock %}

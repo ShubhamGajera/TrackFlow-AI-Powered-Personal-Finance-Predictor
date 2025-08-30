@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User Role</title>
+</head>
+<body>
+<h1>Edit Role for {{ user.username }}</h1>
+<form method="POST">
+    <label>Role:</label>
+    <select name="role">
+        <option value="user" {% if user.role=='user' %}selected{% endif %}>User</option>
+        <option value="admin" {% if user.role=='admin' %}selected{% endif %}>Admin</option>
+    </select>
+    <button type="submit">Update Role</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,5 @@
+body { background: #f6f9fc; }
+.navbar { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card-stat { border-left: 6px solid rgba(255,255,255,0.6); }
+.card-stat .stat-title { font-size: 0.875rem; color: #6c757d; text-transform: uppercase; letter-spacing: .04em; }
+.card-stat .stat-value { font-size: 1.5rem; font-weight: 700; }

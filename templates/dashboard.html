@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="h4 mb-3">Dashboard</h2>
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card card-stat">
+      <div class="card-body">
+        <div class="stat-title">Income (This Month)</div>
+        <div class="stat-value">₹ {{ income_this_month|round(2) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-stat">
+      <div class="card-body">
+        <div class="stat-title">Expense (This Month)</div>
+        <div class="stat-value text-danger">₹ {{ expense_this_month|round(2) }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-stat">
+      <div class="card-body">
+        <div class="stat-title">Net (This Month)</div>
+        <div class="stat-value {% if income_this_month-expense_this_month < 0 %}text-danger{% else %}text-success{% endif %}">
+          ₹ {{ (income_this_month - expense_this_month)|round(2) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Monthly Expense Trend</h5>
+    <canvas id="trendChart"></canvas>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Top Categories (This Month)</h5>
+    {% if by_category %}
+      <ul class="list-group list-group-flush">
+        {% for cat, val in by_category.items() %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>{{ cat }}</span>
+            <strong>₹ {{ val|round(2) }}</strong>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted mb-0">No expenses this month yet.</p>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+const months = {{ months|tojson }};
+const totals = {{ totals|tojson }};
+const ctx = document.getElementById('trendChart');
+if (ctx) {
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Monthly Expenses',
+        data: totals,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+</script>
+{% endblock %}

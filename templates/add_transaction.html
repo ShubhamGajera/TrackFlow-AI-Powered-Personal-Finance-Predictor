@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="h4 mb-3">Add Transaction</h2>
+<div class="card">
+  <div class="card-body">
+    <form method="POST">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">Type</label>
+          <select name="type" class="form-select">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Amount</label>
+          <input type="number" step="0.01" min="0" class="form-control" name="amount" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Category</label>
+          <select name="category" class="form-select">
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Bills</option>
+            <option>Shopping</option>
+            <option>Health</option>
+            <option>Education</option>
+            <option>Entertainment</option>
+            <option>Travel</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-control" name="date">
+        </div>
+        <div class="col-12">
+          <label class="form-label">Note (optional)</label>
+          <input type="text" class="form-control" name="note" placeholder="e.g., Dinner with friends">
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary">Save</button>
+          <a class="btn btn-outline-secondary" href="{{ url_for('transactions') }}">View History</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

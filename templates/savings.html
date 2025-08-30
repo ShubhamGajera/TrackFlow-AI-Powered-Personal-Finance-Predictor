@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="h4 mb-3">Savings & Strategies</h2>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Your Target</h5>
+        <form method="POST" class="row g-2">
+          <div class="col-8">
+            <label class="form-label">Monthly Savings Target (₹)</label>
+            <input type="number" name="monthly_savings_target" step="0.01" min="0" class="form-control"
+                   value="{{ (goal.monthly_savings_target if goal else 0) | round(2) }}">
+          </div>
+          <div class="col-4 d-flex align-items-end">
+            <button class="btn btn-primary w-100">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Personalized Tips</h5>
+        <ul class="mb-0">
+          {% for tip in tips %}
+            <li>{{ tip }}</li>
+          {% endfor %}
+          {% if not tips %}
+            <li class="text-muted">Add transactions to see tailored tips.</li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">This Month Snapshot</h5>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="border rounded-3 p-3 mb-3">
+          <div class="text-muted small">Income</div>
+          <div class="h4 mb-0">₹ {{ snapshot.this_month_income }}</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="border rounded-3 p-3 mb-3">
+          <div class="text-muted small">Expense</div>
+          <div class="h4 mb-0">₹ {{ snapshot.this_month_expense }}</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="border rounded-3 p-3 mb-3">
+          <div class="text-muted small">Top Categories</div>
+          {% if snapshot.top_categories %}
+            <ul class="mb-0">
+              {% for cat, val in snapshot.top_categories %}
+                <li>{{ cat }} — ₹ {{ val|round(2) }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="text-muted">No data yet.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

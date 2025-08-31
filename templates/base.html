@@ -52,12 +52,12 @@
               }
             }
           }
-        },
-        darkMode: 'class',
+        }
       }
     </script>
 
     <style>
+      
       body { font-family: 'Inter', sans-serif; }
       .code-font { font-family: 'Fira Code', monospace; }
       
@@ -112,7 +112,7 @@
   <body class="bg-dark-900 text-slate-100 min-h-screen">
     <!-- Navigation -->
     <nav class="nav-glass sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           <!-- Logo -->
           <div class="flex items-center space-x-2">
@@ -138,12 +138,12 @@
                 <a href="{{ url_for('transactions') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">History</a>
                 <a href="{{ url_for('savings') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Savings</a>
                 <a href="{{ url_for('analytics') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Analytics</a>
-                                <a href="{{ url_for('predictions') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Predictions</a>
+                <a href="{{ url_for('predictions') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Predictions</a>
                 <a href="{{ url_for('profile') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Profile</a>
                 <a href="{{ url_for('settings') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Settings</a>
-                {% endif %}
-                <a href="{{ url_for('about') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">About</a>
-                <a href="{{ url_for('help_page') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Help</a>
+              {% endif %}
+              <a href="{{ url_for('about') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">About</a>
+              <a href="{{ url_for('help_page') }}" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-all">Help</a>
             </div>
           </div>
 
@@ -179,27 +179,29 @@
       </div>
 
       <!-- Mobile menu -->
-      <div class="md:hidden hidden" id="mobile-menu">
+      <div class="md:hidden hidden mobile-menu" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-dark-800 border-t border-slate-700">
           {% if current_user.is_authenticated %}
             {% if current_user.role == 'admin' %}
-              <a href="{{ url_for('admin_dashboard') }}" class="text-red-300 hover:bg-red-900/20 hover:text-red-200 block px-3 py-2 rounded-md text-base font-medium">Admin Dashboard</a>
+              <a href="{{ url_for('admin_dashboard') }}" class="mobile-nav-item text-red-300 hover:bg-red-900/20 hover:text-red-200">Admin Dashboard</a>
             {% endif %}
-            <a href="{{ url_for('dashboard') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-            <a href="{{ url_for('add_transaction') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Add Transaction</a>
-            <a href="{{ url_for('transactions') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">History</a>
-            <a href="{{ url_for('savings') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Savings</a>
-            <a href="{{ url_for('analytics') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Analytics</a>
-            <a href="{{ url_for('predictions') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Predictions</a>
-            <a href="{{ url_for('profile') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Profile</a>
-            <a href="{{ url_for('settings') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Settings</a>
-            <a href="{{ url_for('logout') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Logout</a>
+            <a href="{{ url_for('dashboard') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Dashboard</a>
+            <a href="{{ url_for('add_transaction') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Add Transaction</a>
+            <a href="{{ url_for('transactions') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">History</a>
+            <a href="{{ url_for('savings') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Savings</a>
+            <a href="{{ url_for('analytics') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Analytics</a>
+            <a href="{{ url_for('predictions') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Predictions</a>
+            <a href="{{ url_for('profile') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Profile</a>
+            <a href="{{ url_for('settings') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Settings</a>
+            <div class="mobile-nav-divider"></div>
+            <a href="{{ url_for('logout') }}" class="mobile-nav-item text-red-400 hover:bg-red-900/20 hover:text-red-200 font-semibold">Logout</a>
           {% else %}
-            <a href="{{ url_for('login') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
+            <a href="{{ url_for('login') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Login</a>
             <a href="{{ url_for('register') }}" class="btn-primary-glow text-white block px-3 py-2 rounded-md text-base font-medium">Register</a>
           {% endif %}
-          <a href="{{ url_for('about') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-          <a href="{{ url_for('help_page') }}" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Help</a>
+          <div class="mobile-nav-divider"></div>
+          <a href="{{ url_for('about') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">About</a>
+          <a href="{{ url_for('help_page') }}" class="mobile-nav-item text-slate-300 hover:bg-slate-700 hover:text-white">Help</a>
         </div>
       </div>
     </nav>
@@ -259,18 +261,18 @@
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-slate-200 uppercase tracking-wider mb-4">Company</h3>
+            <h3 class="text-sm font-semibold text-slate-200 uppercase tracking-wider mb-4">Support</h3>
             <ul class="space-y-2">
               <li><a href="{{ url_for('about') }}" class="text-slate-400 hover:text-white transition-colors">About</a></li>
-              <li><a href="{{ url_for('help_page') }}" class="text-slate-400 hover:text-white transition-colors">Support</a></li>
-              <li><a href="{{ url_for('settings') }}" class="text-slate-400 hover:text-white transition-colors">Settings</a></li>
-              <li><a href="{{ url_for('profile') }}" class="text-slate-400 hover:text-white transition-colors">Profile</a></li>
+              <li><a href="{{ url_for('help_page') }}" class="text-slate-400 hover:text-white transition-colors">Help & Support</a></li>
+              <li><a href="mailto:shubhamgajera122@gmail.com" class="text-slate-400 hover:text-white transition-colors">Contact Support</a></li>
+              <li><a href="mailto:shubhamgajera122@gmail.com" class="text-slate-400 hover:text-white transition-colors">Email: shubhamgajera122@gmail.com</a></li>
             </ul>
           </div>
         </div>
         <div class="mt-8 pt-8 border-t border-slate-800">
           <p class="text-center text-slate-400 text-sm">
-            &copy; 2024 Trackflow. Built for learning and demonstration purposes.
+            &copy; 2024 Trackflow. Built with ❤️ by <a href="mailto:shubhamgajera122@gmail.com" class="text-primary-400 hover:text-primary-300">Shubham Gajera</a>
           </p>
         </div>
       </div>

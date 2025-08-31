@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="space-y-8">
+<div class="space-y-6 sm:space-y-8 savings-grid">
   <!-- Header -->
   <div class="text-center">
-    <h1 class="text-3xl font-bold text-white mb-2">Savings & Goals</h1>
-    <p class="text-slate-400 max-w-2xl mx-auto">
+    <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Savings & Goals</h1>
+    <p class="text-slate-400 max-w-2xl mx-auto px-4">
       Set financial goals, track your progress, and get personalized savings strategies to achieve your dreams.
     </p>
   </div>
 
   <!-- Savings Target & Current Month Overview -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
     <!-- Savings Target Card -->
-    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
-      <h3 class="text-lg font-semibold text-white mb-6">Monthly Savings Target</h3>
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-4 sm:p-6 card-hover">
+      <h3 class="text-lg font-semibold text-white mb-4 sm:mb-6">Monthly Savings Target</h3>
       
-      <form method="POST" class="space-y-6">
+      <form method="POST" class="space-y-4 sm:space-y-6">
         <div>
           <label class="block text-sm font-medium text-slate-300 mb-2">
             Set Your Monthly Goal
@@ -30,13 +30,13 @@
               step="0.01" 
               min="0"
               value="{{ (goal.monthly_savings_target if goal else 0) | round(2) }}"
-              class="input-dark w-full pl-12 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+              class="input-dark w-full pl-12 pr-4 py-3 sm:py-4 text-xl sm:text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               placeholder="5000.00"
             >
           </div>
         </div>
 
-        <button type="submit" class="btn-primary-glow w-full py-3 px-6 rounded-xl text-white font-semibold text-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900">
+        <button type="submit" class="btn-primary-glow w-full py-3 px-4 sm:px-6 rounded-xl text-white font-semibold text-base sm:text-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900">
           <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
           </svg>
@@ -46,7 +46,7 @@
 
       <!-- Progress Visualization -->
       {% if goal and goal.monthly_savings_target > 0 %}
-      <div class="mt-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+      <div class="mt-6 sm:mt-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
         <div class="flex items-center justify-between mb-3">
           <span class="text-sm text-slate-400">Progress This Month</span>
           <span class="text-sm font-medium text-white">
@@ -67,13 +67,13 @@
     </div>
 
     <!-- Personalized Tips -->
-    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
-      <h3 class="text-lg font-semibold text-white mb-6">Personalized Savings Tips</h3>
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-4 sm:p-6 card-hover">
+      <h3 class="text-lg font-semibold text-white mb-4 sm:mb-6">Personalized Savings Tips</h3>
       
       {% if tips %}
-      <div class="space-y-4">
+      <div class="space-y-3 sm:space-y-4">
         {% for tip in tips %}
-        <div class="flex items-start space-x-3 p-4 bg-primary-500/10 border border-primary-500/20 rounded-lg">
+        <div class="flex items-start space-x-3 p-3 sm:p-4 bg-primary-500/10 border border-primary-500/20 rounded-lg">
           <div class="w-6 h-6 bg-primary-500/20 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
             <svg class="w-3 h-3 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
@@ -84,7 +84,7 @@
         {% endfor %}
       </div>
       {% else %}
-      <div class="text-center py-8">
+      <div class="text-center py-6 sm:py-8">
         <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg class="w-8 h-8 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
@@ -98,15 +98,15 @@
   </div>
 
   <!-- This Month Snapshot -->
-  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
-    <h3 class="text-lg font-semibold text-white mb-6">This Month's Financial Snapshot</h3>
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-4 sm:p-6 card-hover">
+    <h3 class="text-lg font-semibold text-white mb-4 sm:mb-6">This Month's Financial Snapshot</h3>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       <!-- Income Card -->
-      <div class="bg-gradient-to-r from-green-900/20 to-green-800/20 border border-green-500/20 rounded-xl p-6">
+      <div class="bg-gradient-to-r from-green-900/20 to-green-800/20 border border-green-500/20 rounded-xl p-4 sm:p-6">
         <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
-            <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
@@ -114,15 +114,15 @@
         </div>
         <div class="space-y-1">
           <h4 class="text-sm text-slate-400">Total Income</h4>
-          <p class="text-2xl font-bold text-white">₹ {{ snapshot.this_month_income }}</p>
+          <p class="text-xl sm:text-2xl font-bold text-white">₹ {{ snapshot.this_month_income }}</p>
         </div>
       </div>
 
       <!-- Expenses Card -->
-      <div class="bg-gradient-to-r from-red-900/20 to-red-800/20 border border-red-500/20 rounded-xl p-6">
+      <div class="bg-gradient-to-r from-red-900/20 to-red-800/20 border border-red-500/20 rounded-xl p-4 sm:p-6">
         <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
-            <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
             </svg>
           </div>
@@ -130,15 +130,15 @@
         </div>
         <div class="space-y-1">
           <h4 class="text-sm text-slate-400">Total Expenses</h4>
-          <p class="text-2xl font-bold text-white">₹ {{ snapshot.this_month_expense }}</p>
+          <p class="text-xl sm:text-2xl font-bold text-white">₹ {{ snapshot.this_month_expense }}</p>
         </div>
       </div>
 
       <!-- Net Savings Card -->
-      <div class="bg-gradient-to-r from-primary-900/20 to-purple-900/20 border border-primary-500/20 rounded-xl p-6">
+      <div class="bg-gradient-to-r from-primary-900/20 to-purple-900/20 border border-primary-500/20 rounded-xl p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
         <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
-            <svg class="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
             </svg>
           </div>
@@ -147,7 +147,7 @@
         <div class="space-y-1">
           <h4 class="text-sm text-slate-400">Net Savings</h4>
           {% set net_savings = snapshot.this_month_income - snapshot.this_month_expense %}
-          <p class="text-2xl font-bold {% if net_savings >= 0 %}text-green-400{% else %}text-red-400{% endif %}">
+          <p class="text-xl sm:text-2xl font-bold {% if net_savings >= 0 %}text-green-400{% else %}text-red-400{% endif %}">
             {% if net_savings >= 0 %}+{% endif %}₹ {{ net_savings }}
           </p>
         </div>
@@ -156,42 +156,42 @@
   </div>
 
   <!-- Top Categories & Savings Opportunities -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
     <!-- Top Categories -->
-    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
-      <h3 class="text-lg font-semibold text-white mb-6">Top Expense Categories</h3>
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-4 sm:p-6 card-hover">
+      <h3 class="text-lg font-semibold text-white mb-4 sm:mb-6">Top Expense Categories</h3>
       
       {% if snapshot.top_categories %}
-      <div class="space-y-4">
+      <div class="space-y-3 sm:space-y-4">
         {% for cat, val in snapshot.top_categories %}
         <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg border border-slate-700/50">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center">
+          <div class="flex items-center space-x-3 min-w-0 flex-1">
+            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-primary-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
               {% if cat == 'Food' %}
-                <span class="text-sm">🍽️</span>
+                <span class="text-xs sm:text-sm">🍽️</span>
               {% elif cat == 'Transport' %}
-                <span class="text-sm">🚗</span>
+                <span class="text-xs sm:text-sm">🚗</span>
               {% elif cat == 'Bills' %}
-                <span class="text-sm">📱</span>
+                <span class="text-xs sm:text-sm">📱</span>
               {% elif cat == 'Shopping' %}
-                <span class="text-sm">🛍️</span>
+                <span class="text-xs sm:text-sm">🛍️</span>
               {% elif cat == 'Health' %}
-                <span class="text-sm">🏥</span>
+                <span class="text-xs sm:text-sm">🏥</span>
               {% elif cat == 'Education' %}
-                <span class="text-sm">📚</span>
+                <span class="text-xs sm:text-sm">📚</span>
               {% elif cat == 'Entertainment' %}
-                <span class="text-sm">🎬</span>
+                <span class="text-xs sm:text-sm">🎬</span>
               {% elif cat == 'Travel' %}
-                <span class="text-sm">✈️</span>
+                <span class="text-xs sm:text-sm">✈️</span>
               {% else %}
-                <span class="text-sm">📋</span>
+                <span class="text-xs sm:text-sm">📋</span>
               {% endif %}
             </div>
-            <span class="text-white font-medium">{{ cat }}</span>
+            <span class="text-white font-medium truncate">{{ cat }}</span>
           </div>
-          <div class="text-right">
-            <div class="text-white font-semibold">₹ {{ val|round(2) }}</div>
-            <div class="text-xs text-slate-400">
+          <div class="text-right flex-shrink-0 ml-2">
+            <div class="text-white font-semibold text-sm sm:text-base">₹ {{ val|round(2) }}</div>
+            <div class="text-xs text-slate-400 hidden sm:block">
               {{ ((val / snapshot.this_month_expense * 100) if snapshot.this_month_expense > 0 else 0)|round(1) }}% of total
             </div>
           </div>

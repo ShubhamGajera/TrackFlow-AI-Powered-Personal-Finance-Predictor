@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Edit User Goal</h1>
+    <p class="text-slate-400">Update goal details for {{ goal.user.username }}</p>
+  </div>
+
+  <!-- Edit Form -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+    <form method="POST" class="space-y-6">
+      <!-- Goal Name -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Goal Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          value="{{ goal.name or 'Monthly Savings' }}"
+          class="input-dark w-full py-4 px-4 text-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          required
+        >
+      </div>
+
+      <!-- Target Amount -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Target Amount</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <span class="text-slate-400 text-xl font-medium">₹</span>
+          </div>
+          <input 
+            type="number" 
+            name="target_amount" 
+            step="0.01" 
+            min="0"
+            value="{{ goal.target_amount or 0 }}"
+            class="input-dark w-full pl-12 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            placeholder="0.00"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Achieved Amount -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Achieved Amount</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <span class="text-slate-400 text-xl font-medium">₹</span>
+          </div>
+          <input 
+            type="number" 
+            name="achieved" 
+            step="0.01" 
+            min="0"
+            value="{{ goal.achieved or 0 }}"
+            class="input-dark w-full pl-12 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            placeholder="0.00"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Monthly Savings Target -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Monthly Savings Target</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <span class="text-slate-400 text-xl font-medium">₹</span>
+          </div>
+          <input 
+            type="number" 
+            name="monthly_savings_target" 
+            step="0.01" 
+            min="0"
+            value="{{ goal.monthly_savings_target or 0 }}"
+            class="input-dark w-full pl-12 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            placeholder="0.00"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Progress Display -->
+      {% if goal.target_amount and goal.target_amount > 0 %}
+      <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm text-slate-400">Progress</span>
+          <span class="text-sm font-medium text-white">
+            ₹{{ goal.achieved or 0 }} / ₹{{ goal.target_amount }}
+          </span>
+        </div>
+        {% set progress_percent = ((goal.achieved or 0) / goal.target_amount * 100) if goal.target_amount > 0 else 0 %}
+        <div class="w-full bg-slate-700 rounded-full h-3 mb-2">
+          <div class="bg-gradient-to-r from-green-500 to-green-400 h-3 rounded-full transition-all duration-1000" style="width: {{ [progress_percent, 100]|min }}%"></div>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-slate-400">0%</span>
+          <span class="text-slate-400">{{ progress_percent|round(1) }}%</span>
+          <span class="text-slate-400">100%</span>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-700">
+        <button 
+          type="submit" 
+          class="btn-primary-glow flex-1 py-3 px-6 rounded-xl text-white font-semibold text-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Update Goal
+        </button>
+        
+        <a 
+          href="{{ url_for('admin_dashboard') }}" 
+          class="border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white py-3 px-6 rounded-xl font-semibold text-lg text-center transition-all hover:bg-slate-800/50"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Back to Dashboard
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Form validation
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  
+  form.addEventListener('submit', function(e) {
+    const targetAmount = parseFloat(form.querySelector('input[name="target_amount"]').value);
+    const achieved = parseFloat(form.querySelector('input[name="achieved"]').value);
+    const monthlyTarget = parseFloat(form.querySelector('input[name="monthly_savings_target"]').value);
+    
+    if (targetAmount < 0 || achieved < 0 || monthlyTarget < 0) {
+      e.preventDefault();
+      alert('All amounts must be positive numbers.');
+      return false;
+    }
+    
+    if (achieved > targetAmount) {
+      e.preventDefault();
+      alert('Achieved amount cannot exceed target amount.');
+      return false;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg class="animate-spin w-5 h-5 mr-2 inline-block" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Updating...
+    `;
+  });
+});
+</script>
+{% endblock %} 

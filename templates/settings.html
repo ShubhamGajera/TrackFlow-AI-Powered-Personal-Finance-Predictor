@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Settings & Preferences</h1>
+    <p class="text-slate-400 max-w-2xl mx-auto">
+      Customize your TrackFlow experience, manage account settings, and configure your preferences.
+    </p>
+  </div>
+
+  <!-- Settings Tabs -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+    <div class="flex space-x-1 bg-slate-800/50 p-1 rounded-lg mb-6">
+      <button class="tab-button active flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all" data-tab="account">
+        <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+        Account
+      </button>
+      <button class="tab-button flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all" data-tab="preferences">
+        <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+        </svg>
+        Preferences
+      </button>
+      <button class="tab-button flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all" data-tab="security">
+        <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+        </svg>
+        Security
+      </button>
+      <button class="tab-button flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all" data-tab="notifications">
+        <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+        </svg>
+        Notifications
+      </button>
+    </div>
+
+    <!-- Account Settings Tab -->
+    <div id="account" class="tab-content active">
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Account Information</h3>
+        
+        <form method="POST" action="{{ url_for('profile') }}" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+              <input 
+                type="text" 
+                name="username" 
+                value="{{ current_user.username }}"
+                class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                required
+              >
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                value="{{ current_user.email }}"
+                class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                required
+              >
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-300 mb-2">New Password (leave blank to keep current)</label>
+            <input 
+              type="password" 
+              name="password" 
+              class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+              placeholder="Enter new password"
+            >
+          </div>
+          
+          <button type="submit" class="btn-primary-glow py-3 px-6 rounded-xl text-white font-semibold transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900">
+            <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            Update Account
+          </button>
+        </form>
+        
+        <div class="border-t border-slate-700 pt-6">
+          <h4 class="text-md font-semibold text-red-400 mb-4">Danger Zone</h4>
+          <div class="bg-red-900/20 border border-red-500/20 rounded-lg p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h5 class="text-white font-medium">Delete Account</h5>
+                <p class="text-sm text-slate-400">Permanently delete your account and all data. This action cannot be undone.</p>
+              </div>
+              <button class="btn-danger px-4 py-2 rounded-lg text-white font-medium transition-all hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">
+                Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preferences Tab -->
+    <div id="preferences" class="tab-content hidden">
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-white mb-4">User Preferences</h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Dark Mode</h4>
+              <p class="text-sm text-slate-400">Use dark theme for better eye comfort</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Auto-save</h4>
+              <p class="text-sm text-slate-400">Automatically save form data as you type</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Data Export</h4>
+              <p class="text-sm text-slate-400">Allow data export in CSV/Excel format</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+        </div>
+        
+        <div class="border-t border-slate-700 pt-6">
+          <h4 class="text-md font-semibold text-primary-400 mb-4">Currency & Locale</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Currency</label>
+              <select class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                <option value="INR" selected>₹ Indian Rupee (INR)</option>
+                <option value="USD">$ US Dollar (USD)</option>
+                <option value="EUR">€ Euro (EUR)</option>
+                <option value="GBP">£ British Pound (GBP)</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Date Format</label>
+              <select class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Tab -->
+    <div id="security" class="tab-content hidden">
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Security Settings</h3>
+        
+        <div class="space-y-4">
+          <div class="bg-blue-900/20 border border-blue-500/20 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <svg class="w-6 h-6 text-blue-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="text-blue-400 font-medium">Two-Factor Authentication</h4>
+                <p class="text-sm text-slate-300">Add an extra layer of security to your account</p>
+                <button class="mt-2 text-blue-400 hover:text-blue-300 text-sm font-medium">Enable 2FA →</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-green-900/20 border border-green-500/20 rounded-lg p-4">
+            <div class="flex items-start space-x-3">
+              <svg class="w-6 h-6 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <div>
+                <h4 class="text-green-400 font-medium">Login History</h4>
+                <p class="text-sm text-slate-300">Monitor your account access and detect suspicious activity</p>
+                <button class="mt-2 text-green-400 hover:text-green-300 text-sm font-medium">View History →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-slate-700 pt-6">
+          <h4 class="text-md font-semibold text-yellow-400 mb-4">Session Management</h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+              <div>
+                <div class="text-white font-medium">Current Session</div>
+                <div class="text-xs text-slate-400">Windows 10 • Chrome • 127.0.0.1</div>
+              </div>
+              <span class="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">Active</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+              <div>
+                <div class="text-white font-medium">Mobile Session</div>
+                <div class="text-xs text-slate-400">Android • Mobile Browser • 192.168.1.100</div>
+              </div>
+              <button class="text-xs text-red-400 hover:text-red-300">Terminate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications Tab -->
+    <div id="notifications" class="tab-content hidden">
+      <div class="space-y-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Notification Preferences</h3>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Email Notifications</h4>
+              <p class="text-sm text-slate-400">Receive important updates via email</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Budget Alerts</h4>
+              <p class="text-sm text-slate-400">Get notified when approaching budget limits</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Weekly Reports</h4>
+              <p class="text-sm text-slate-400">Receive weekly financial summaries</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+          
+          <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+            <div>
+              <h4 class="text-white font-medium">Goal Reminders</h4>
+              <p class="text-sm text-slate-400">Get reminded about your savings goals</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked>
+              <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+            </label>
+          </div>
+        </div>
+        
+        <div class="border-t border-slate-700 pt-6">
+          <h4 class="text-md font-semibold text-primary-400 mb-4">Notification Schedule</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Daily Digest Time</label>
+              <select class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                <option value="09:00">9:00 AM</option>
+                <option value="12:00" selected>12:00 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="21:00">9:00 PM</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-300 mb-2">Weekly Report Day</label>
+              <select class="input-dark w-full py-3 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all">
+                <option value="monday">Monday</option>
+                <option value="friday" selected>Friday</option>
+                <option value="sunday">Sunday</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Tab switching functionality
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const targetTab = this.getAttribute('data-tab');
+      
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.add('hidden'));
+      
+      // Add active class to clicked button and show target content
+      this.classList.add('active');
+      document.getElementById(targetTab).classList.remove('hidden');
+    });
+  });
+  
+  // Toggle switches functionality
+  const toggles = document.querySelectorAll('input[type="checkbox"]');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('change', function() {
+      // Save preference to localStorage
+      const settingName = this.closest('.flex').querySelector('h4').textContent.toLowerCase().replace(/\s+/g, '_');
+      localStorage.setItem(settingName, this.checked);
+      
+      // Show feedback
+      const feedback = document.createElement('div');
+      feedback.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+      feedback.textContent = 'Setting updated!';
+      document.body.appendChild(feedback);
+      
+      setTimeout(() => {
+        feedback.remove();
+      }, 2000);
+    });
+  });
+  
+  // Load saved preferences
+  toggles.forEach(toggle => {
+    const settingName = toggle.closest('.flex').querySelector('h4').textContent.toLowerCase().replace(/\s+/g, '_');
+    const savedValue = localStorage.getItem(settingName);
+    if (savedValue !== null) {
+      toggle.checked = savedValue === 'true';
+    }
+  });
+  
+  // Form validation
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+      const submitBtn = this.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin w-5 h-5 mr-2 inline-block" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Updating...
+      `;
+    });
+  });
+});
+</script>
+
+<style>
+.tab-button.active {
+  background-color: rgb(59 130 246);
+  color: white;
+}
+
+.btn-danger {
+  background-color: rgb(239 68 68);
+}
+
+.btn-danger:hover {
+  background-color: rgb(220 38 38);
+}
+</style>
+{% endblock %} 

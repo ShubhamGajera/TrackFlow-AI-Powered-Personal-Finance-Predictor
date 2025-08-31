@@ -377,6 +377,155 @@ def edit_user(user_id):
 
     return render_template('edit_user.html', user=user)
 
+# ---------- User Management ----------
+@app.route('/admin/delete_user/<int:user_id>', methods=['POST'])
+@login_required
+def admin_delete_user(user_id):
+    if current_user.role != 'admin':
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('dashboard'))
+    
+    if current_user.id == user_id:
+        flash("You cannot delete yourself!", "danger")
+        return redirect(url_for('admin_dashboard'))
+    
+    user = User.query.get_or_404(user_id)
+    username = user.username
+    db.session.delete(user)
+    db.session.commit()
+    flash(f'User {username} deleted successfully.', 'success')
+    return redirect(url_for('admin_dashboard'))
+
+# ---------- Goal Management ----------
+@app.route('/admin/edit_goal/<int:goal_id>', methods=['GET', 'POST'])
+@login_required
+def admin_edit_goal(goal_id):
+    if current_user.role != 'admin':
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('dashboard'))
+    
+    goal = Goal.query.get_or_404(goal_id)
+    if request.method == 'POST':
+        goal.name = request.form.get('name', 'Monthly Savings')
+        goal.target_amount = float(request.form.get('target_amount', 0))
+        goal.achieved = float(request.form.get('achieved', 0))
+        goal.monthly_savings_target = float(request.form.get('monthly_savings_target', 0))
+        db.session.commit()
+        flash('Goal updated successfully.', 'success')
+        return redirect(url_for('admin_dashboard'))
+    
+    return render_template('admin_edit_goal.html', goal=goal)
+
+@app.route('/admin/delete_goal/<int:goal_id>', methods=['POST'])
+@login_required
+def admin_delete_goal(goal_id):
+    if current_user.role != 'admin':
+        flash("Access denied. Admins only.", "danger")
+        return redirect(url_for('dashboard'))
+    
+    goal = Goal.query.get_or_404(goal_id)
+    db.session.delete(goal)
+    db.session.commit()
+    flash('Goal deleted successfully.', 'success')
+    return redirect(url_for('admin_dashboard'))
+
+# ---------- Analytics & Reports ----------
+@app.route('/analytics')
+@login_required
+def analytics():
+    today = date.today()
+    year_start = date(today.year, 1, 1)
+    
+    # Yearly data
+    yearly_transactions = Transaction.query.filter(
+        Transaction.user_id == current_user.id,
+        Transaction.date >= year_start
+    ).all()
+    
+    # Monthly breakdown
+    monthly_data = {}
+    for month in range(1, 13):
+        month_start = date(today.year, month, 1)
+        if month == 12:
+            month_end = date(today.year + 1, 1, 1)
+        else:
+            month_end = date(today.year, month + 1, 1)
+        
+        month_transactions = [t for t in yearly_transactions if month_start <= t.date < month_end]
+        income = sum(t.amount for t in month_transactions if t.type == 'income')
+        expense = sum(t.amount for t in month_transactions if t.type == 'expense')
+        monthly_data[month] = {'income': income, 'expense': expense, 'savings': income - expense}
+    
+    # Category analysis
+    category_expenses = {}
+    for t in yearly_transactions:
+        if t.type == 'expense':
+            if t.category not in category_expenses:
+                category_expenses[t.category] = 0
+            category_expenses[t.category] += t.amount
+    
+    # Top categories
+    top_categories = sorted(category_expenses.items(), key=lambda x: x[1], reverse=True)[:10]
+    
+    return render_template('analytics.html', 
+                         monthly_data=monthly_data,
+                         top_categories=top_categories,
+                         total_income=sum(t.amount for t in yearly_transactions if t.type == 'income'),
+                         total_expense=sum(t.amount for t in yearly_transactions if t.type == 'expense'))
+
+# ---------- Settings ----------
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('settings.html')
+
+# ---------- Help & Support ----------
+@app.route('/help')
+def help_page():
+    return render_template('help.html')
+
+# ---------- API Endpoints for AJAX ----------
+@app.route('/api/transaction_stats')
+@login_required
+def api_transaction_stats():
+    today = date.today()
+    month_start = date(today.year, today.month, 1)
+    
+    month_transactions = Transaction.query.filter(
+        Transaction.user_id == current_user.id,
+        Transaction.date >= month_start
+    ).all()
+    
+    income = sum(t.amount for t in month_transactions if t.type == 'income')
+    expense = sum(t.amount for t in month_transactions if t.type == 'expense')
+    
+    return {
+        'income': income,
+        'expense': expense,
+        'savings': income - expense,
+        'transaction_count': len(month_transactions)
+    }
+
+@app.route('/api/category_chart')
+@login_required
+def api_category_chart():
+    today = date.today()
+    month_start = date(today.year, today.month, 1)
+    
+    expenses = Transaction.query.filter(
+        Transaction.user_id == current_user.id,
+        Transaction.type == 'expense',
+        Transaction.date >= month_start
+    ).all()
+    
+    category_data = {}
+    for t in expenses:
+        if t.category not in category_data:
+            category_data[t.category] = 0
+        category_data[t.category] += t.amount
+    
+    return {'categories': list(category_data.keys()), 'amounts': list(category_data.values())}
+
 # ---------------- Run the app ----------------
 if __name__ == "__main__":
     app.run(debug=True)

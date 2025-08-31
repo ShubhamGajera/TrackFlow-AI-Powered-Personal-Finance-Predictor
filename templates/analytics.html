@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="space-y-8">
+  <!-- Header -->
+  <div class="text-center">
+    <h1 class="text-3xl font-bold text-white mb-2">Financial Analytics</h1>
+    <p class="text-slate-400 max-w-2xl mx-auto">
+      Deep insights into your financial patterns, trends, and opportunities for better money management.
+    </p>
+  </div>
+
+  <!-- Year Overview Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-gradient-to-br from-green-900/20 to-green-800/20 border border-green-500/20 rounded-2xl p-6 card-hover">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">Total</span>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-sm text-slate-400">Yearly Income</h4>
+        <p class="text-2xl font-bold text-white">₹{{ total_income|round(2) }}</p>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-br from-red-900/20 to-red-800/20 border border-red-500/20 rounded-2xl p-6 card-hover">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded-full">Total</span>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-sm text-slate-400">Yearly Expenses</h4>
+        <p class="text-2xl font-bold text-white">₹{{ total_expense|round(2) }}</p>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-br from-primary-900/20 to-purple-900/20 border border-primary-500/20 rounded-2xl p-6 card-hover">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-primary-400 bg-primary-500/10 px-2 py-1 rounded-full">Net</span>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-sm text-slate-400">Yearly Savings</h4>
+        {% set yearly_savings = total_income - total_expense %}
+        <p class="text-2xl font-bold {% if yearly_savings >= 0 %}text-green-400{% else %}text-red-400{% endif %}">
+          {% if yearly_savings >= 0 %}+{% endif %}₹{{ yearly_savings|round(2) }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Monthly Trend Chart -->
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+      <h3 class="text-lg font-semibold text-white mb-6">Monthly Financial Trends</h3>
+      <canvas id="monthlyChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Category Distribution Chart -->
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+      <h3 class="text-lg font-semibold text-white mb-6">Top Expense Categories</h3>
+      <canvas id="categoryChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- Monthly Breakdown Table -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+    <h3 class="text-lg font-semibold text-white mb-6">Monthly Breakdown</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-slate-800/50 border-b border-slate-700">
+          <tr>
+            <th class="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Month</th>
+            <th class="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Income</th>
+            <th class="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Expenses</th>
+            <th class="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Savings</th>
+            <th class="px-6 py-4 text-left text-xs font-medium text-slate-400 uppercase tracking-wider">Savings Rate</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700">
+          {% for month_num, data in monthly_data.items() %}
+          {% set month_name = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month_num - 1] %}
+          {% set savings_rate = (data.savings / data.income * 100) if data.income > 0 else 0 %}
+          <tr class="hover:bg-slate-800/30 transition-colors">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-white">{{ month_name }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-green-400">₹{{ data.income|round(2) }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-red-400">₹{{ data.expense|round(2) }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm {% if data.savings >= 0 %}text-green-400{% else %}text-red-400{% endif %}">
+                {% if data.savings >= 0 %}+{% endif %}₹{{ data.savings|round(2) }}
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm {% if savings_rate >= 20 %}text-green-400{% elif savings_rate >= 10 %}text-yellow-400{% else %}text-red-400{% endif %}">
+                {{ savings_rate|round(1) }}%
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Top Categories Analysis -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+    <h3 class="text-lg font-semibold text-white mb-6">Top Expense Categories Analysis</h3>
+    <div class="space-y-4">
+      {% for category, amount in top_categories %}
+      {% set percentage = (amount / total_expense * 100) if total_expense > 0 else 0 %}
+      <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center">
+            {% if category == 'Food' %}
+              <span class="text-lg">🍽️</span>
+            {% elif category == 'Transport' %}
+              <span class="text-lg">🚗</span>
+            {% elif category == 'Bills' %}
+              <span class="text-lg">📱</span>
+            {% elif category == 'Shopping' %}
+              <span class="text-lg">🛍️</span>
+            {% elif category == 'Health' %}
+              <span class="text-lg">🏥</span>
+            {% elif category == 'Education' %}
+              <span class="text-lg">📚</span>
+            {% elif category == 'Entertainment' %}
+              <span class="text-lg">🎬</span>
+            {% elif category == 'Travel' %}
+              <span class="text-lg">✈️</span>
+            {% else %}
+              <span class="text-lg">📋</span>
+            {% endif %}
+          </div>
+          <div>
+            <div class="text-white font-medium">{{ category }}</div>
+            <div class="text-xs text-slate-400">{{ percentage|round(1) }}% of total expenses</div>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-white font-semibold">₹{{ amount|round(2) }}</div>
+          <div class="text-xs text-slate-400">
+            {% if percentage > 30 %}
+              ⚠️ High spending
+            {% elif percentage > 20 %}
+              ⚡ Moderate
+            {% else %}
+              ✅ Good control
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Financial Insights -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
+    <h3 class="text-lg font-semibold text-white mb-6">💡 Financial Insights & Recommendations</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <h4 class="text-md font-semibold text-primary-400">Savings Analysis</h4>
+        {% set avg_monthly_savings = (total_income - total_expense) / 12 %}
+        {% if avg_monthly_savings > 0 %}
+          <div class="bg-green-900/20 border border-green-500/20 rounded-lg p-4">
+            <div class="flex items-center space-x-2 mb-2">
+              <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-green-400 font-medium">Great Job!</span>
+            </div>
+            <p class="text-sm text-slate-300">You're saving an average of ₹{{ avg_monthly_savings|round(2) }} per month.</p>
+          </div>
+        {% else %}
+          <div class="bg-red-900/20 border border-red-500/20 rounded-lg p-4">
+            <div class="flex items-center space-x-2 mb-2">
+              <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-red-400 font-medium">Attention Needed</span>
+            </div>
+            <p class="text-sm text-slate-300">You're spending more than you earn. Consider reducing expenses.</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="text-md font-semibold text-primary-400">Category Recommendations</h4>
+        {% if top_categories %}
+        {% set top_category, top_amount = top_categories[0] %}
+        {% set top_percentage = (top_amount / total_expense * 100) if total_expense > 0 else 0 %}
+        {% if top_percentage > 30 %}
+          <div class="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-4">
+            <div class="flex items-center space-x-2 mb-2">
+              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-yellow-400 font-medium">High Spending Alert</span>
+            </div>
+            <p class="text-sm text-slate-300">{{ top_category }} accounts for {{ top_percentage|round(1) }}% of your expenses. Consider reducing this category.</p>
+          </div>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Monthly Trend Chart
+  const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+  const monthlyData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+      label: 'Income',
+      data: [
+        {% for month_num in range(1, 13) %}
+          {{ monthly_data[month_num].income }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      borderColor: 'rgb(34, 197, 94)',
+      backgroundColor: 'rgba(34, 197, 94, 0.1)',
+      tension: 0.4
+    }, {
+      label: 'Expenses',
+      data: [
+        {% for month_num in range(1, 13) %}
+          {{ monthly_data[month_num].expense }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      borderColor: 'rgb(239, 68, 68)',
+      backgroundColor: 'rgba(239, 68, 68, 0.1)',
+      tension: 0.4
+    }]
+  };
+
+  new Chart(monthlyCtx, {
+    type: 'line',
+    data: monthlyData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: 'rgb(148, 163, 184)'
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)'
+          },
+          ticks: {
+            color: 'rgb(148, 163, 184)'
+          }
+        },
+        x: {
+          grid: {
+            color: 'rgba(148, 163, 184, 0.1)'
+          },
+          ticks: {
+            color: 'rgb(148, 163, 184)'
+          }
+        }
+      }
+    }
+  });
+
+  // Category Distribution Chart
+  const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+  const categoryData = {
+    labels: [
+      {% for category, amount in top_categories[:8] %}
+        '{{ category }}'{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ],
+    datasets: [{
+      data: [
+        {% for category, amount in top_categories[:8] %}
+          {{ amount }}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      backgroundColor: [
+        'rgba(59, 130, 246, 0.8)',
+        'rgba(16, 185, 129, 0.8)',
+        'rgba(245, 158, 11, 0.8)',
+        'rgba(239, 68, 68, 0.8)',
+        'rgba(139, 92, 246, 0.8)',
+        'rgba(236, 72, 153, 0.8)',
+        'rgba(6, 182, 212, 0.8)',
+        'rgba(34, 197, 94, 0.8)'
+      ],
+      borderWidth: 2,
+      borderColor: 'rgba(148, 163, 184, 0.3)'
+    }]
+  };
+
+  new Chart(categoryCtx, {
+    type: 'doughnut',
+    data: categoryData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: 'rgb(148, 163, 184)',
+            padding: 20,
+            usePointStyle: true
+          }
+        }
+      }
+    }
+  });
+});
+</script>
+{% endblock %} 

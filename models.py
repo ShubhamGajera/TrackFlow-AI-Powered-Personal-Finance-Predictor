@@ -38,3 +38,7 @@ class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, unique=True)
     monthly_savings_target = db.Column(db.Float, nullable=False, default=0.0)
+    # Optional columns that will be added by the fix script
+    name = db.Column(db.String(100), nullable=True, default='Monthly Savings')
+    target_amount = db.Column(db.Float, nullable=True, default=0.0)
+    achieved = db.Column(db.Float, nullable=True, default=0.0)

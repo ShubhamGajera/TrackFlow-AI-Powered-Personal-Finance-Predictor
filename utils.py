@@ -91,7 +91,11 @@ def saving_tips(user_id: int):
     ).group_by(Transaction.category).order_by(db.desc('total')).all()
 
     goal = Goal.query.filter_by(user_id=user_id).first()
-    target = goal.monthly_savings_target if goal else 0.0
+    # Safely access target_amount with fallback to monthly_savings_target
+    if goal and hasattr(goal, 'target_amount') and goal.target_amount is not None:
+        target = goal.target_amount
+    else:
+        target = goal.monthly_savings_target if goal else 0.0
 
     tips = []
     if incomes <= 0:

@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Edit Transaction</h1>
+    <p class="text-slate-400">Update your transaction details</p>
+  </div>
+
+  <!-- Edit Form -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+    <form method="POST" class="space-y-6">
+      <!-- Transaction Type -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-3">Transaction Type</label>
+        <div class="grid grid-cols-2 gap-4">
+          <label class="relative">
+            <input type="radio" name="type" value="expense" {% if transaction.type == 'expense' %}checked{% endif %} class="sr-only peer">
+            <div class="p-4 border-2 border-slate-700 rounded-xl cursor-pointer transition-all peer-checked:border-red-500 peer-checked:bg-red-500/10 hover:border-slate-600 hover:bg-slate-800/50">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <span class="text-white font-medium">Expense</span>
+              </div>
+            </div>
+          </label>
+          
+          <label class="relative">
+            <input type="radio" name="type" value="income" {% if transaction.type == 'income' %}checked{% endif %} class="sr-only peer">
+            <div class="p-4 border-2 border-slate-700 rounded-xl cursor-pointer transition-all peer-checked:border-green-500 peer-checked:bg-green-500/10 hover:border-slate-600 hover:bg-slate-800/50">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <span class="text-white font-medium">Income</span>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Amount</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <span class="text-slate-400 text-xl font-medium">₹</span>
+          </div>
+          <input 
+            type="number" 
+            name="amount" 
+            step="0.01" 
+            min="0"
+            value="{{ transaction.amount }}"
+            class="input-dark w-full pl-12 pr-4 py-4 text-2xl rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+            placeholder="0.00"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Category</label>
+        <select name="category" class="input-dark w-full py-4 px-4 text-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" required>
+          <option value="Food" {% if transaction.category == 'Food' %}selected{% endif %}>🍽️ Food</option>
+          <option value="Transport" {% if transaction.category == 'Transport' %}selected{% endif %}>🚗 Transport</option>
+          <option value="Bills" {% if transaction.category == 'Bills' %}selected{% endif %}>📱 Bills</option>
+          <option value="Shopping" {% if transaction.category == 'Shopping' %}selected{% endif %}>🛍️ Shopping</option>
+          <option value="Health" {% if transaction.category == 'Health' %}selected{% endif %}>🏥 Health</option>
+          <option value="Education" {% if transaction.category == 'Education' %}selected{% endif %}>📚 Education</option>
+          <option value="Entertainment" {% if transaction.category == 'Entertainment' %}selected{% endif %}>🎬 Entertainment</option>
+          <option value="Travel" {% if transaction.category == 'Travel' %}selected{% endif %}>✈️ Travel</option>
+          <option value="Salary" {% if transaction.category == 'Salary' %}selected{% endif %}>💼 Salary</option>
+          <option value="Business" {% if transaction.category == 'Business' %}selected{% endif %}>🏢 Business</option>
+          <option value="Investment" {% if transaction.category == 'Investment' %}selected{% endif %}>📈 Investment</option>
+          <option value="Gift" {% if transaction.category == 'Gift' %}selected{% endif %}>🎁 Gift</option>
+          <option value="Other" {% if transaction.category == 'Other' %}selected{% endif %}>📋 Other</option>
+        </select>
+      </div>
+
+      <!-- Date -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Date</label>
+        <input 
+          type="date" 
+          name="date" 
+          value="{{ transaction.date.strftime('%Y-%m-%d') }}"
+          class="input-dark w-full py-4 px-4 text-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+          required
+        >
+      </div>
+
+      <!-- Note -->
+      <div>
+        <label class="block text-sm font-medium text-slate-300 mb-2">Note (Optional)</label>
+        <textarea 
+          name="note" 
+          rows="3"
+          class="input-dark w-full py-4 px-4 text-lg rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
+          placeholder="Add a note about this transaction..."
+        >{{ transaction.note or '' }}</textarea>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-700">
+        <button 
+          type="submit" 
+          class="btn-primary-glow flex-1 py-3 px-6 rounded-xl text-white font-semibold text-lg transition-all hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Update Transaction
+        </button>
+        
+        <a 
+          href="{{ url_for('transactions') }}" 
+          class="border border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white py-3 px-6 rounded-xl font-semibold text-lg text-center transition-all hover:bg-slate-800/50"
+        >
+          <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// Add visual feedback to type selection
+document.addEventListener('DOMContentLoaded', function() {
+  const typeInputs = document.querySelectorAll('input[name="type"]');
+  
+  typeInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      // Remove previous selections visual feedback
+      document.querySelectorAll('label > div').forEach(label => {
+        label.classList.remove('ring-2', 'ring-primary-500');
+      });
+      
+      // Add visual feedback to selected option
+      this.closest('label').querySelector('div').classList.add('ring-2', 'ring-primary-500');
+    });
+  });
+
+  // Set initial visual state
+  const checkedInput = document.querySelector('input[name="type"]:checked');
+  if (checkedInput) {
+    checkedInput.closest('label').querySelector('div').classList.add('ring-2', 'ring-primary-500');
+  }
+
+  // Form validation
+  const form = document.querySelector('form');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  
+  form.addEventListener('submit', function(e) {
+    const amount = parseFloat(form.querySelector('input[name="amount"]').value);
+    const type = form.querySelector('input[name="type"]:checked').value;
+    const category = form.querySelector('select[name="category"]').value;
+    const date = form.querySelector('input[name="date"]').value;
+    
+    if (!amount || amount <= 0) {
+      e.preventDefault();
+      alert('Please enter a valid amount greater than 0.');
+      return false;
+    }
+    
+    if (!type) {
+      e.preventDefault();
+      alert('Please select a transaction type.');
+      return false;
+    }
+    
+    if (!category) {
+      e.preventDefault();
+      alert('Please select a category.');
+      return false;
+    }
+    
+    if (!date) {
+      e.preventDefault();
+      alert('Please select a date.');
+      return false;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg class="animate-spin w-5 h-5 mr-2 inline-block" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Updating...
+    `;
+  });
+});
+</script>
+{% endblock %} 

@@ -1,6 +1,465 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 class="h4 mb-3">About Trackflow</h2>
-<p>Trackflow is an educational project that demonstrates how to build an AI-powered personal finance tracker using Flask, PostgreSQL, and simple machine learning techniques for forecasting.</p>
-<p><strong>Key concepts:</strong> CRUD with SQLAlchemy, auth with Flask-Login, charts with Chart.js, and a simple linear regression for predicting next month's expenses.</p>
+<div class="space-y-16">
+  <!-- Hero Section -->
+  <div class="text-center relative">
+    <!-- Background Effects -->
+    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl"></div>
+    
+    <div class="relative space-y-6">
+      <div class="inline-flex items-center px-4 py-2 rounded-full text-sm bg-primary-500/10 text-primary-400 border border-primary-500/20 mb-4">
+        <span class="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
+        About Trackflow
+      </div>
+      
+      <h1 class="text-4xl lg:text-6xl font-black text-white mb-6">
+        Building the Future of
+        <span class="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent block">
+          Personal Finance
+        </span>
+      </h1>
+      
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+        Trackflow is an innovative educational project that demonstrates how modern web technologies 
+        and artificial intelligence can transform personal finance management.
+      </p>
+    </div>
+  </div>
+
+  <!-- Technology Stack -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="space-y-6">
+      <h2 class="text-3xl font-bold text-white">Built with Modern Tech</h2>
+      <p class="text-lg text-slate-400 leading-relaxed">
+        Trackflow showcases how to build a full-stack web application using industry-standard 
+        technologies and best practices for scalable, secure financial applications.
+      </p>
+      
+      <div class="space-y-4">
+        <div class="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Flask & Python</h3>
+            <p class="text-sm text-slate-400">Backend web framework with SQLAlchemy ORM</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+          <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">PostgreSQL Database</h3>
+            <p class="text-sm text-slate-400">Robust data storage with ACID compliance</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 01-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 00-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 00-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 01-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 01-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 01.174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 004.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 002.466-2.163 11.944 11.944 0 002.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747C23.708 4.367 20.567.014 16.313.221a24.83 24.83 0 00-4.741-.221z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Machine Learning</h3>
+            <p class="text-sm text-slate-400">AI-powered predictions and insights</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack Visual -->
+    <div class="relative">
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+              <div class="text-xs text-slate-400 mb-1">Frontend</div>
+              <div class="code-font text-sm text-primary-400">HTML5 + Tailwind CSS</div>
+            </div>
+            <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+              <div class="text-xs text-slate-400 mb-1">Backend</div>
+              <div class="code-font text-sm text-green-400">Flask + SQLAlchemy</div>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+              <div class="text-xs text-slate-400 mb-1">Database</div>
+              <div class="code-font text-sm text-blue-400">PostgreSQL</div>
+            </div>
+            <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+              <div class="text-xs text-slate-400 mb-1">Charts</div>
+              <div class="code-font text-sm text-purple-400">Chart.js</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Deep Dive -->
+  <div>
+    <h2 class="text-3xl font-bold text-white text-center mb-12">Key Learning Concepts</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- CRUD Operations -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Full-Stack Development</h3>
+        <p class="text-sm text-slate-400">
+          Learn to build complete web applications from database design to user interface implementation.
+        </p>
+      </div>
+
+      <!-- Learning Objective 2 -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Security Best Practices</h3>
+        <p class="text-sm text-slate-400">
+          Implement proper authentication, authorization, and data protection for financial applications.
+        </p>
+      </div>
+
+      <!-- Learning Objective 3 -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Data Analysis & ML</h3>
+        <p class="text-sm text-slate-400">
+          Apply machine learning techniques to real-world financial data for predictive analytics.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Implementation -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Architecture Overview -->
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold text-white">System Architecture</h2>
+      
+      <div class="space-y-4">
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <h4 class="text-white font-semibold mb-2">🎨 Presentation Layer</h4>
+          <p class="text-sm text-slate-400">
+            Responsive HTML templates with Tailwind CSS for modern, mobile-first design
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <h4 class="text-white font-semibold mb-2">⚡ Application Layer</h4>
+          <p class="text-sm text-slate-400">
+            Flask web framework with blueprint organization and session management
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <h4 class="text-white font-semibold mb-2">🗃️ Data Layer</h4>
+          <p class="text-sm text-slate-400">
+            PostgreSQL database with SQLAlchemy ORM for efficient data operations
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
+          <h4 class="text-white font-semibold mb-2">🤖 Intelligence Layer</h4>
+          <p class="text-sm text-slate-400">
+            Machine learning algorithms for expense prediction and financial insights
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Examples -->
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold text-white">Code Highlights</h2>
+      
+      <!-- Code Block 1 -->
+      <div class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden">
+        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex items-center justify-between">
+          <span class="text-sm text-slate-300 code-font">models.py</span>
+          <span class="text-xs text-slate-400">SQLAlchemy Models</span>
+        </div>
+        <div class="p-4 overflow-x-auto">
+          <pre class="code-font text-sm text-slate-300"><span class="text-purple-400">class</span> <span class="text-blue-400">Transaction</span>(<span class="text-yellow-400">db.Model</span>):
+    <span class="text-green-400">id</span> = <span class="text-blue-400">db.Column</span>(<span class="text-yellow-400">db.Integer</span>, <span class="text-red-400">primary_key=True</span>)
+    <span class="text-green-400">amount</span> = <span class="text-blue-400">db.Column</span>(<span class="text-yellow-400">db.Float</span>, <span class="text-red-400">nullable=False</span>)
+    <span class="text-green-400">type</span> = <span class="text-blue-400">db.Column</span>(<span class="text-yellow-400">db.String(20)</span>)
+    <span class="text-green-400">category</span> = <span class="text-blue-400">db.Column</span>(<span class="text-yellow-400">db.String(50)</span>)</pre>
+        </div>
+      </div>
+
+      <!-- Code Block 2 -->
+      <div class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden">
+        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex items-center justify-between">
+          <span class="text-sm text-slate-300 code-font">predictions.py</span>
+          <span class="text-xs text-slate-400">ML Prediction</span>
+        </div>
+        <div class="p-4 overflow-x-auto">
+          <pre class="code-font text-sm text-slate-300"><span class="text-purple-400">from</span> <span class="text-blue-400">sklearn.linear_model</span> <span class="text-purple-400">import</span> <span class="text-yellow-400">LinearRegression</span>
+
+<span class="text-purple-400">def</span> <span class="text-green-400">predict_next_month</span>(<span class="text-red-400">monthly_totals</span>):
+    <span class="text-green-400">model</span> = <span class="text-yellow-400">LinearRegression</span>()
+    <span class="text-green-400">model</span>.<span class="text-blue-400">fit</span>(<span class="text-red-400">X, y</span>)
+    <span class="text-purple-400">return</span> <span class="text-green-400">model</span>.<span class="text-blue-400">predict</span>(<span class="text-red-400">next_month</span>)</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Features Section -->
+  <div>
+    <h2 class="text-3xl font-bold text-white text-center mb-12">Core Features & Learning Objectives</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- CRUD Operations -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-4">CRUD with SQLAlchemy</h3>
+        <p class="text-slate-400 mb-4">
+          Learn how to implement Create, Read, Update, and Delete operations using Flask-SQLAlchemy 
+          for database management.
+        </p>
+        <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+          <code class="code-font text-sm text-green-400">
+            Transaction.query.filter_by(user_id=current_user.id).all()
+          </code>
+        </div>
+      </div>
+
+      <!-- Authentication -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-4">Authentication with Flask-Login</h3>
+        <p class="text-slate-400 mb-4">
+          Secure user authentication system with session management, password hashing, 
+          and role-based access control.
+        </p>
+        <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+          <code class="code-font text-sm text-blue-400">
+            @login_required<br>
+            @admin_required
+          </code>
+        </div>
+      </div>
+
+      <!-- Data Visualization -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-4">Interactive Charts</h3>
+        <p class="text-slate-400 mb-4">
+          Beautiful data visualizations using Chart.js to display spending trends, 
+          category breakdowns, and financial insights.
+        </p>
+        <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+          <code class="code-font text-sm text-purple-400">
+            Chart.js + Dynamic Data
+          </code>
+        </div>
+      </div>
+
+      <!-- Machine Learning -->
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8 card-hover">
+        <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-4">AI-Powered Predictions</h3>
+        <p class="text-slate-400 mb-4">
+          Simple linear regression model that analyzes historical spending patterns 
+          to forecast future expenses and provide budget recommendations.
+        </p>
+        <div class="bg-slate-800/50 rounded-lg p-3 border border-slate-700">
+          <code class="code-font text-sm text-yellow-400">
+            Linear Regression + Time Series
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Value -->
+  <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-8">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-white mb-4">Educational Project</h2>
+      <p class="text-lg text-slate-400 max-w-3xl mx-auto">
+        This project serves as a comprehensive learning resource for developers interested in 
+        building full-stack web applications with real-world features.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Learning Objective 1 -->
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Full-Stack Development</h3>
+        <p class="text-sm text-slate-400">
+          Learn to build complete web applications from database design to user interface implementation.
+        </p>
+      </div>
+
+      <!-- Learning Objective 2 -->
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Security Best Practices</h3>
+        <p class="text-sm text-slate-400">
+          Implement proper authentication, authorization, and data protection for financial applications.
+        </p>
+      </div>
+
+      <!-- Learning Objective 3 -->
+      <div class="text-center">
+        <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white mb-3">Data Analysis & ML</h3>
+        <p class="text-sm text-slate-400">
+          Apply machine learning techniques to real-world financial data for predictive analytics.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Goals -->
+  <div class="text-center">
+    <h2 class="text-3xl font-bold text-white mb-8">Project Goals</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors">
+        <div class="text-3xl mb-3">🎓</div>
+        <h3 class="font-semibold text-white mb-2">Educational</h3>
+        <p class="text-sm text-slate-400">Demonstrate modern web development techniques</p>
+      </div>
+
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors">
+        <div class="text-3xl mb-3">🔧</div>
+        <h3 class="font-semibold text-white mb-2">Practical</h3>
+        <p class="text-sm text-slate-400">Build real-world applicable skills and knowledge</p>
+      </div>
+
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors">
+        <div class="text-3xl mb-3">💡</div>
+        <h3 class="font-semibold text-white mb-2">Innovative</h3>
+        <p class="text-sm text-slate-400">Showcase AI integration in web applications</p>
+      </div>
+
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors">
+        <div class="text-3xl mb-3">🚀</div>
+        <h3 class="font-semibold text-white mb-2">Scalable</h3>
+        <p class="text-sm text-slate-400">Foundation for production-ready applications</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="text-center bg-gradient-to-r from-primary-500/10 to-purple-500/10 rounded-2xl border border-primary-500/20 p-12">
+    <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Learning?</h2>
+    <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+      Explore the codebase, experiment with features, and build your own financial tracking application.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{{ url_for('register') }}" class="bg-gradient-to-r from-primary-500 to-purple-500 text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center hover:scale-105 transition-transform">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+        </svg>
+        Try the Demo
+      </a>
+      <a href="#" class="border border-slate-600 hover:border-primary-500 text-slate-300 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transition-all hover:bg-slate-800/50">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        View Source Code
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Add scroll animations
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  // Observe all cards and sections
+  document.querySelectorAll('.card-hover').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Code block syntax highlighting effect
+  document.querySelectorAll('pre').forEach(pre => {
+    pre.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.02)';
+      this.style.transition = 'transform 0.2s ease';
+    });
+    
+    pre.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+
+// Add interactive effects to learning cards
+document.querySelectorAll('.bg-slate-800\\/50.hover\\:bg-slate-800\\/70').forEach(card => {
+  card.addEventListener('click', function() {
+    // Add a subtle glow effect when clicked
+    this.style.boxShadow = '0 0 20px rgba(99, 102, 241, 0.3)';
+    setTimeout(() => {
+      this.style.boxShadow = '';
+    }, 1000);
+  });
+});
+</script>
 {% endblock %}

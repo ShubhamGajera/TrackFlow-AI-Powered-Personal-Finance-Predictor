@@ -17,26 +17,6 @@ A comprehensive personal finance management system built with Flask, designed to
 
 > *"Life is too short for boring finance apps. Let's make money management fun!"* 🎯
 
-## 📸 Screenshots
-
-> *"A picture is worth a thousand words, but a screenshot is worth a thousand bugs found!"* 📱
-
-### 🖥️ Desktop View
-![TrackFlow Desktop Dashboard](screenshots/desktop-dashboard.png)
-*Main dashboard showing financial overview, charts, and statistics*
-
-### 📱 Mobile View  
-![TrackFlow Mobile View](screenshots/mobile-dashboard.png)
-*Responsive mobile interface optimized for all devices*
-
-### 👑 Admin Panel
-![TrackFlow Admin Dashboard](screenshots/admin-dashboard.png)
-*Comprehensive admin panel with navigation and user management*
-
-### 📊 Analytics & Charts
-![TrackFlow Analytics](screenshots/analytics.png)
-*Beautiful charts and financial insights powered by Chart.js*
-
 ## 🌟 Features
 
 TrackFlow comes packed with powerful features to make your financial journey smooth and enjoyable:

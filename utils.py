@@ -26,27 +26,91 @@ def get_monthly_totals(user_id: int):
 
 def predict_next_month_expense(months, totals):
     if len(totals) == 0:
-        return {'method':'none','prediction':0.0,'note':'No expense data yet.'}
+        return {'method':'none','prediction':0.0,'note':'No expense data yet.','confidence':0}
     if len(totals) < 3:
-        # Fallback: average
+        # Fallback: average with recent trend
         avg = float(np.mean(totals))
-        return {'method':'average','prediction':round(avg,2),'note':'Using simple average due to limited data.'}
+        trend = totals[-1] - totals[0] if len(totals) > 1 else 0
+        prediction = avg + (trend / 2)
+        prediction = max(0.0, round(prediction, 2))
+        confidence = 50 + (len(totals) * 10)  # Confidence increases with more data
+        return {
+            'method': 'weighted_average',
+            'prediction': prediction,
+            'note': 'Using weighted average with trend analysis.',
+            'confidence': min(confidence, 70)  # Cap confidence at 70% for limited data
+        }
 
-    # Use a simple linear regression over time index
     try:
         from sklearn.linear_model import LinearRegression
+        from sklearn.metrics import r2_score
+        import statsmodels.api as sm
+
+        # Prepare data
         X = np.arange(len(totals)).reshape(-1,1)
         y = np.array(totals)
+
+        # Linear regression with confidence interval
         model = LinearRegression()
         model.fit(X, y)
         next_idx = np.array([[len(totals)]])
-        pred = float(model.predict(next_idx)[0])
-        pred = max(0.0, round(pred, 2))
-        return {'method':'linear_regression','prediction':pred,'note':'Predicted using linear trend.'}
+        pred_lr = float(model.predict(next_idx)[0])
+
+        # Calculate R-squared for model quality
+        r2 = r2_score(y, model.predict(X))
+
+        # Time series decomposition for seasonal patterns
+        if len(totals) >= 12:
+            decomposition = sm.tsa.seasonal_decompose(y, period=12, extrapolate_trend='freq')
+            seasonal = decomposition.seasonal[-1]  # Use last seasonal component
+            trend = decomposition.trend[-1]  # Use last trend component
+            pred_adjusted = pred_lr + seasonal
+        else:
+            pred_adjusted = pred_lr
+
+        # Exponential smoothing for recent trends
+        alpha = 0.3  # Smoothing factor
+        exp_smoothed = totals[-1]
+        for i in range(len(totals)-2, -1, -1):
+            exp_smoothed = alpha * totals[i] + (1-alpha) * exp_smoothed
+
+        # Combine predictions with weights
+        final_pred = 0.6 * pred_adjusted + 0.4 * exp_smoothed
+        final_pred = max(0.0, round(final_pred, 2))
+
+        # Calculate confidence score (0-100)
+        confidence = min(95, int(r2 * 70 + len(totals)))
+        if len(totals) >= 12:
+            confidence += 5  # Bonus for seasonal data
+
+        # Determine prediction quality
+        if confidence >= 90:
+            quality = "High confidence prediction"
+        elif confidence >= 75:
+            quality = "Good confidence prediction"
+        else:
+            quality = "Moderate confidence prediction"
+
+        return {
+            'method': 'advanced_ml',
+            'prediction': final_pred,
+            'note': f'{quality} using ML and time series analysis.',
+            'confidence': confidence
+        }
+
     except Exception as e:
-        # fallback
-        avg = float(np.mean(totals))
-        return {'method':'average','prediction':round(avg,2),'note':'ML fallback to average.'}
+        # Enhanced fallback using weighted average
+        weights = np.exp(np.linspace(-1, 0, len(totals)))  # Exponential weights
+        weights = weights / weights.sum()
+        weighted_avg = float(np.sum(weights * totals))
+        prediction = max(0.0, round(weighted_avg, 2))
+        
+        return {
+            'method': 'weighted_average',
+            'prediction': prediction,
+            'note': 'Using exponentially weighted average.',
+            'confidence': 65
+        }
 
 def category_breakdown(user_id: int):
     # Sum expenses by category for the current month

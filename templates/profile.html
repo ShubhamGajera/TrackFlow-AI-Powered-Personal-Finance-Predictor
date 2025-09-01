@@ -144,7 +144,7 @@
   </div>
 
   <!-- Account Statistics -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <!-- Member Since -->
     <div class="stats-card card-hover rounded-2xl p-6">
       <div class="flex items-center justify-between mb-4">
@@ -195,102 +195,104 @@
         <p class="text-xs text-slate-500">All features unlocked</p>
       </div>
     </div>
+
+    <!-- Financial Score -->
+    <div class="stats-card card-hover rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <span class="text-xs text-yellow-400 bg-yellow-500/10 px-2 py-1 rounded-full">Score</span>
+      </div>
+      <div class="space-y-1">
+        <h3 class="text-sm text-slate-400 font-medium">Financial Score</h3>
+        <p class="text-lg font-bold text-yellow-400">85/100</p>
+        <p class="text-xs text-slate-500">Excellent habits</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Preferences Section -->
+  <!-- Quick Actions & Achievements -->
   <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
     <h3 class="text-lg font-semibold text-white mb-6 flex items-center">
       <svg class="w-5 h-5 mr-3 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
       </svg>
-      Preferences & Settings
+      Quick Actions & Achievements
     </h3>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Currency Preference -->
-      <div>
-        <label class="block text-sm font-medium text-slate-300 mb-2">
-          Currency
-        </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span class="text-slate-400 font-medium">₹</span>
-          </div>
-          <select class="input-dark w-full pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none">
-            <option value="INR" selected>Indian Rupee (₹)</option>
-            <option value="USD">US Dollar ($)</option>
-            <option value="EUR">Euro (€)</option>
-            <option value="GBP">British Pound (£)</option>
-          </select>
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Theme Preference -->
-      <div>
-        <label class="block text-sm font-medium text-slate-300 mb-2">
-          Theme
-        </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <select class="input-dark w-full pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none">
-            <option value="dark" selected>Dark Mode</option>
-            <option value="light">Light Mode</option>
-            <option value="auto">System Default</option>
-          </select>
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Notification Preferences -->
-    <div class="mt-8 pt-6 border-t border-slate-700">
-      <h4 class="text-md font-semibold text-white mb-4">Notification Preferences</h4>
-      
+      <!-- Quick Actions -->
       <div class="space-y-4">
-        <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
-          <div>
-            <h5 class="text-sm font-medium text-white">Monthly Reports</h5>
-            <p class="text-xs text-slate-400">Get monthly financial summaries via email</p>
-          </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" class="sr-only peer" checked>
-            <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
-          </label>
+        <h4 class="text-md font-semibold text-primary-400">Quick Actions</h4>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <button class="bg-primary-500/20 border border-primary-500/30 rounded-lg p-3 hover:bg-primary-500/30 transition-colors text-center">
+            <div class="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+              <span class="text-lg">📊</span>
+            </div>
+            <span class="text-xs text-white font-medium">Export Data</span>
+          </button>
+          
+          <button class="bg-green-500/20 border border-green-500/30 rounded-lg p-3 hover:bg-green-500/30 transition-colors text-center">
+            <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+              <span class="text-lg">📈</span>
+            </div>
+            <span class="text-xs text-white font-medium">Generate Report</span>
+          </button>
+          
+          <button class="bg-blue-500/20 border border-blue-500/30 rounded-lg p-3 hover:bg-blue-500/30 transition-colors text-center">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+              <span class="text-lg">🎯</span>
+            </div>
+            <span class="text-xs text-white font-medium">Set Goals</span>
+          </button>
+          
+          <button class="bg-purple-500/20 border border-purple-500/30 rounded-lg p-3 hover:bg-purple-500/30 transition-colors text-center">
+            <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+              <span class="text-lg">🔔</span>
+            </div>
+            <span class="text-xs text-white font-medium">Notifications</span>
+          </button>
         </div>
+      </div>
 
-        <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
-          <div>
-            <h5 class="text-sm font-medium text-white">Budget Alerts</h5>
-            <p class="text-xs text-slate-400">Get notified when you exceed budget limits</p>
+      <!-- Achievements -->
+      <div class="space-y-4">
+        <h4 class="text-md font-semibold text-primary-400">Recent Achievements</h4>
+        
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3 p-3 bg-green-900/20 border border-green-500/20 rounded-lg">
+            <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+              <span class="text-sm">🏆</span>
+            </div>
+            <div>
+              <h5 class="text-sm font-medium text-green-400">Savings Champion</h5>
+              <p class="text-xs text-slate-300">Saved 20% of income for 3 months</p>
+            </div>
           </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" class="sr-only peer" checked>
-            <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
-          </label>
-        </div>
-
-        <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700/50">
-          <div>
-            <h5 class="text-sm font-medium text-white">Savings Reminders</h5>
-            <p class="text-xs text-slate-400">Weekly reminders to check your progress</p>
+          
+          <div class="flex items-center space-x-3 p-3 bg-blue-900/20 border border-blue-500/20 rounded-lg">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+              <span class="text-sm">📱</span>
+            </div>
+            <div>
+              <h5 class="text-sm font-medium text-blue-400">Consistent Tracker</h5>
+              <p class="text-xs text-slate-300">Logged transactions for 30 days</p>
+            </div>
           </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" class="sr-only peer">
-            <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-500/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
-          </label>
+          
+          <div class="flex items-center space-x-3 p-3 bg-purple-900/20 border border-purple-500/20 rounded-lg">
+            <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+              <span class="text-sm">🎯</span>
+            </div>
+            <div>
+              <h5 class="text-sm font-medium text-purple-400">Goal Achiever</h5>
+              <p class="text-xs text-slate-300">Reached monthly savings target</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

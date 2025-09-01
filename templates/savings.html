@@ -270,40 +270,157 @@
   <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
     <h3 class="text-lg font-semibold text-white mb-6">30-Day Savings Challenges</h3>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Challenge 1 -->
-      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Challenge 1: No-Spend Days -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="no-spend">
+        <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+          <span class="text-2xl">🚫</span>
+        </div>
+        <h4 class="text-center font-semibold text-white mb-2">No-Spend Days</h4>
+        <p class="text-center text-sm text-slate-400 mb-4">Complete 5 no-spend days this week</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹800-1200</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="3"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="4"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="5"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/5</span>
+        </div>
+      </div>
+
+      <!-- Challenge 2: Cook at Home -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="cook-home">
         <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
           <span class="text-2xl">🥗</span>
         </div>
         <h4 class="text-center font-semibold text-white mb-2">Cook at Home</h4>
-        <p class="text-center text-sm text-slate-400 mb-4">Cook 5 meals at home this week</p>
-        <div class="text-center">
-          <span class="text-green-400 font-semibold">Save ₹1,200</span>
+        <p class="text-center text-sm text-slate-400 mb-4">Cook 7 meals at home this week</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹1,400-2,100</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="3"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="4"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="5"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="6"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="7"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/7</span>
         </div>
       </div>
 
-      <!-- Challenge 2 -->
-      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group">
+      <!-- Challenge 3: Walk & Save -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="walk-save">
         <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
           <span class="text-2xl">🚶</span>
         </div>
         <h4 class="text-center font-semibold text-white mb-2">Walk & Save</h4>
-        <p class="text-center text-sm text-slate-400 mb-4">Walk instead of ride-sharing 3 times</p>
-        <div class="text-center">
-          <span class="text-green-400 font-semibold">Save ₹600</span>
+        <p class="text-center text-sm text-slate-400 mb-4">Walk instead of ride-sharing 5 times</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹750-1,250</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="3"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="4"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="5"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/5</span>
         </div>
       </div>
 
-      <!-- Challenge 3 -->
-      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group">
+      <!-- Challenge 4: Review Subscriptions -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="subscriptions">
         <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
           <span class="text-2xl">📱</span>
         </div>
         <h4 class="text-center font-semibold text-white mb-2">Review Subscriptions</h4>
-        <p class="text-center text-sm text-slate-400 mb-4">Cancel 1 unused subscription</p>
-        <div class="text-center">
-          <span class="text-green-400 font-semibold">Save ₹500/month</span>
+        <p class="text-center text-sm text-slate-400 mb-4">Cancel 2 unused subscriptions</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹800-1,500/month</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/2</span>
+        </div>
+      </div>
+
+      <!-- Challenge 5: Coffee Challenge -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="coffee">
+        <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+          <span class="text-2xl">☕</span>
+        </div>
+        <h4 class="text-center font-semibold text-white mb-2">Coffee Challenge</h4>
+        <p class="text-center text-sm text-slate-400 mb-4">Make coffee at home for 10 days</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹600-1,000</span>
+        </div>
+        <div class="flex justify-center space-x-2 flex-wrap">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="3"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="4"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="5"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="6"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="7"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="8"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="9"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="10"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/10</span>
+        </div>
+      </div>
+
+      <!-- Challenge 6: Entertainment Swap -->
+      <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800/70 transition-colors cursor-pointer group challenge-card" data-challenge="entertainment">
+        <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+          <span class="text-2xl">🎬</span>
+        </div>
+        <h4 class="text-center font-semibold text-white mb-2">Entertainment Swap</h4>
+        <p class="text-center text-sm text-slate-400 mb-4">Find 3 free entertainment alternatives</p>
+        <div class="text-center mb-3">
+          <span class="text-green-400 font-semibold">Save ₹500-1,200</span>
+        </div>
+        <div class="flex justify-center space-x-2">
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="1"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="2"></div>
+          <div class="w-3 h-3 bg-slate-600 rounded-full challenge-dot" data-day="3"></div>
+        </div>
+        <div class="text-center mt-3">
+          <span class="text-xs text-slate-500">Progress: <span class="challenge-progress">0</span>/3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Challenge Progress Summary -->
+    <div class="mt-8 p-6 bg-slate-800/50 rounded-xl border border-slate-700">
+      <h4 class="text-lg font-semibold text-white mb-4">Weekly Challenge Progress</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+          <span class="text-slate-300">Total Challenges:</span>
+          <span class="text-white font-semibold">6</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+          <span class="text-slate-300">Completed:</span>
+          <span class="text-green-400 font-semibold" id="totalCompleted">0</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+          <span class="text-slate-300">Potential Savings:</span>
+          <span class="text-green-400 font-semibold">₹4,450-7,750</span>
         </div>
       </div>
     </div>
@@ -311,25 +428,111 @@
 </div>
 
 <script>
-// Add interactive animations to savings challenges
+// Enhanced interactive animations for savings challenges
 document.addEventListener('DOMContentLoaded', function() {
-  const challenges = document.querySelectorAll('.bg-slate-800\\/50.cursor-pointer');
+  const challenges = document.querySelectorAll('.challenge-card');
+  let totalCompleted = 0;
+  
+  // Load saved progress from localStorage
+  loadChallengeProgress();
   
   challenges.forEach(challenge => {
     challenge.addEventListener('click', function() {
-      // Add completion effect
-      this.classList.add('bg-green-900/20', 'border-green-500/20');
-      this.classList.remove('bg-slate-800/50', 'border-slate-700');
+      const challengeType = this.dataset.challenge;
+      const dots = this.querySelectorAll('.challenge-dot');
+      const progressSpan = this.querySelector('.challenge-progress');
+      const currentProgress = parseInt(progressSpan.textContent.split('/')[0]);
+      const maxProgress = parseInt(progressSpan.textContent.split('/')[1]);
       
-      // Add checkmark
-      const icon = this.querySelector('.w-12.h-12 span');
-      if (icon && !this.querySelector('.checkmark')) {
-        setTimeout(() => {
-          icon.innerHTML = '✅';
-        }, 300);
+      if (currentProgress < maxProgress) {
+        // Mark next dot as completed
+        const nextDot = dots[currentProgress];
+        if (nextDot) {
+          nextDot.classList.remove('bg-slate-600');
+          nextDot.classList.add('bg-green-500');
+          nextDot.classList.add('animate-pulse');
+          
+          // Update progress
+          const newProgress = currentProgress + 1;
+          progressSpan.textContent = `${newProgress}/${maxProgress}`;
+          
+          // Save progress
+          saveChallengeProgress(challengeType, newProgress);
+          
+          // Check if challenge is completed
+          if (newProgress === maxProgress) {
+            completeChallenge(this);
+            totalCompleted++;
+            updateTotalProgress();
+          }
+        }
       }
     });
   });
+
+  function completeChallenge(challengeCard) {
+    // Add completion effect
+    challengeCard.classList.add('bg-green-900/20', 'border-green-500/20');
+    challengeCard.classList.remove('bg-slate-800/50', 'border-slate-700');
+    
+    // Add checkmark
+    const icon = challengeCard.querySelector('.w-12 span');
+    if (icon) {
+      setTimeout(() => {
+        icon.innerHTML = '✅';
+        icon.classList.add('animate-bounce');
+      }, 300);
+    }
+    
+    // Add celebration effect
+    challengeCard.style.transform = 'scale(1.05)';
+    setTimeout(() => {
+      challengeCard.style.transform = 'scale(1)';
+    }, 200);
+  }
+
+  function saveChallengeProgress(challengeType, progress) {
+    const savedProgress = JSON.parse(localStorage.getItem('challengeProgress') || '{}');
+    savedProgress[challengeType] = progress;
+    localStorage.setItem('challengeProgress', JSON.stringify(savedProgress));
+  }
+
+  function loadChallengeProgress() {
+    const savedProgress = JSON.parse(localStorage.getItem('challengeProgress') || '{}');
+    
+    challenges.forEach(challenge => {
+      const challengeType = challenge.dataset.challenge;
+      const savedProgressValue = savedProgress[challengeType] || 0;
+      const dots = challenge.querySelectorAll('.challenge-dot');
+      const progressSpan = challenge.querySelector('.challenge-progress');
+      
+      // Update progress display
+      progressSpan.textContent = `${savedProgressValue}/${progressSpan.textContent.split('/')[1]}`;
+      
+      // Mark completed dots
+      for (let i = 0; i < savedProgressValue; i++) {
+        if (dots[i]) {
+          dots[i].classList.remove('bg-slate-600');
+          dots[i].classList.add('bg-green-500');
+        }
+      }
+      
+      // Check if challenge is completed
+      if (savedProgressValue >= parseInt(progressSpan.textContent.split('/')[1])) {
+        completeChallenge(challenge);
+        totalCompleted++;
+      }
+    });
+    
+    updateTotalProgress();
+  }
+
+  function updateTotalProgress() {
+    const totalCompletedElement = document.getElementById('totalCompleted');
+    if (totalCompletedElement) {
+      totalCompletedElement.textContent = totalCompleted;
+    }
+  }
 
   // Animate progress bars
   const progressBars = document.querySelectorAll('[style*="width:"]');
@@ -341,6 +544,67 @@ document.addEventListener('DOMContentLoaded', function() {
       bar.style.transition = 'width 1.5s ease-out';
       bar.style.width = targetWidth;
     }, 500);
+  });
+
+  // Add challenge reset functionality (double-click to reset)
+  challenges.forEach(challenge => {
+    let clickCount = 0;
+    let clickTimer;
+    
+    challenge.addEventListener('click', function() {
+      clickCount++;
+      clearTimeout(clickTimer);
+      
+      clickTimer = setTimeout(() => {
+        if (clickCount === 2) {
+          // Double click detected - reset challenge
+          resetChallenge(this);
+        }
+        clickCount = 0;
+      }, 300);
+    });
+  });
+
+  function resetChallenge(challengeCard) {
+    const challengeType = challengeCard.dataset.challenge;
+    const dots = challengeCard.querySelectorAll('.challenge-dot');
+    const progressSpan = challengeCard.querySelector('.challenge-progress');
+    const maxProgress = parseInt(progressSpan.textContent.split('/')[1]);
+    
+    // Reset dots
+    dots.forEach(dot => {
+      dot.classList.remove('bg-green-500', 'animate-pulse');
+      dot.classList.add('bg-slate-600');
+    });
+    
+    // Reset progress
+    progressSpan.textContent = `0/${maxProgress}`;
+    
+    // Reset card appearance
+    challengeCard.classList.remove('bg-green-900/20', 'border-green-500/20');
+    challengeCard.classList.add('bg-slate-800/50', 'border-slate-700');
+    
+    // Reset icon
+    const icon = challengeCard.querySelector('.w-12 span');
+    if (icon) {
+      icon.innerHTML = challengeCard.querySelector('.w-12').dataset.originalIcon || '💰';
+      icon.classList.remove('animate-bounce');
+    }
+    
+    // Save reset progress
+    saveChallengeProgress(challengeType, 0);
+    
+    // Update total progress
+    totalCompleted--;
+    updateTotalProgress();
+  }
+
+  // Store original icons for reset functionality
+  challenges.forEach(challenge => {
+    const icon = challenge.querySelector('.w-12 span');
+    if (icon) {
+      challenge.querySelector('.w-12').dataset.originalIcon = icon.innerHTML;
+    }
   });
 });
 

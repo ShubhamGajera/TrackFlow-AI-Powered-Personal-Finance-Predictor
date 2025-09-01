@@ -14,6 +14,26 @@
     </div>
   </div>
 
+  <!-- Funny Welcome Message -->
+  <div class="bg-gradient-to-r from-primary-500/10 to-purple-500/10 rounded-xl border border-primary-500/20 p-4">
+    <div class="text-center">
+      <p class="text-sm text-primary-400 mb-2">
+        🎉 <strong>Welcome back, Financial Warrior!</strong> 🎉
+      </p>
+      <p class="text-xs text-slate-400">
+        💡 <strong>Today's Motivation:</strong> 
+        {% if income_this_month > expense_this_month %}
+          You're crushing it! Your savings game is stronger than my coffee addiction! ☕💪
+        {% else %}
+          Don't worry! Even the best developers have bugs. Let's turn those expenses into learning opportunities! 🐛➡️✨
+        {% endif %}
+      </p>
+      <p class="text-xs text-slate-500 mt-2">
+        🚀 <strong>Pro Tip:</strong> Remember, every transaction is just data waiting to be analyzed! 📊
+      </p>
+    </div>
+  </div>
+
   <!-- Stats Cards -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
     <!-- Income Card -->

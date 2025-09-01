@@ -473,16 +473,34 @@ def analytics():
                          total_income=sum(t.amount for t in yearly_transactions if t.type == 'income'),
                          total_expense=sum(t.amount for t in yearly_transactions if t.type == 'expense'))
 
-# ---------- Settings ----------
-@app.route('/settings')
-@login_required
-def settings():
-    return render_template('settings.html')
-
 # ---------- Help & Support ----------
 @app.route('/help')
+@login_required
 def help_page():
     return render_template('help.html')
+
+# ---------- Forgot Password ----------
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        
+        if not email:
+            flash('Please enter your email address', 'warning')
+            return redirect(url_for('forgot_password'))
+        
+        # Check if user exists
+        user = User.query.filter_by(email=email).first()
+        if user:
+            # In a real app, you would send a password reset email here
+            flash('If an account with that email exists, you will receive password reset instructions shortly.', 'info')
+        else:
+            # Don't reveal if email exists or not for security
+            flash('If an account with that email exists, you will receive password reset instructions shortly.', 'info')
+        
+        return redirect(url_for('login'))
+    
+    return render_template('forgot_password.html')
 
 # ---------- API Endpoints for AJAX ----------
 @app.route('/api/transaction_stats')

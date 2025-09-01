@@ -213,22 +213,52 @@
     </div>
   </div>
 
-  <!-- Financial Insights -->
+  <!-- AI-Powered Financial Insights & Recommendations -->
   <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover">
-    <h3 class="text-lg font-semibold text-white mb-6">💡 Financial Insights & Recommendations</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <h3 class="text-lg font-semibold text-white mb-6">🤖 AI-Powered Financial Insights & Smart Recommendations</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- Smart Savings Analysis -->
       <div class="space-y-4">
-        <h4 class="text-md font-semibold text-primary-400">Savings Analysis</h4>
+        <h4 class="text-md font-semibold text-primary-400 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+          </svg>
+          AI Savings Analysis
+        </h4>
+        
         {% set avg_monthly_savings = (total_income - total_expense) / 12 %}
+        {% set savings_rate = ((total_income - total_expense) / total_income * 100) if total_income > 0 else 0 %}
+        
         {% if avg_monthly_savings > 0 %}
           <div class="bg-green-900/20 border border-green-500/20 rounded-lg p-4">
             <div class="flex items-center space-x-2 mb-2">
               <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span class="text-green-400 font-medium">Great Job!</span>
+              <span class="text-green-400 font-medium">Excellent Progress! 🎉</span>
             </div>
-            <p class="text-sm text-slate-300">You're saving an average of ₹{{ avg_monthly_savings|round(2) }} per month.</p>
+            <p class="text-sm text-slate-300 mb-2">You're saving an average of ₹{{ avg_monthly_savings|round(2) }} per month.</p>
+            <div class="text-xs text-slate-400">
+              <div class="flex justify-between">
+                <span>Savings Rate:</span>
+                <span class="text-green-400">{{ savings_rate|round(1) }}%</span>
+              </div>
+              <div class="w-full bg-slate-700 rounded-full h-2 mt-1">
+                <div class="bg-green-500 h-2 rounded-full" style="width: {{ [savings_rate, 100]|min }}%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AI Recommendation -->
+          <div class="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3">
+            <div class="flex items-start space-x-2">
+              <span class="text-blue-400 text-lg">💡</span>
+              <div>
+                <p class="text-xs text-slate-300 font-medium">AI Recommendation:</p>
+                <p class="text-xs text-slate-400">Consider investing 70% of your savings in diversified funds for long-term wealth building.</p>
+              </div>
+            </div>
           </div>
         {% else %}
           <div class="bg-red-900/20 border border-red-500/20 rounded-lg p-4">
@@ -236,39 +266,133 @@
               <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
               </svg>
-              <span class="text-red-400 font-medium">Attention Needed</span>
+              <span class="text-red-400 font-medium">Financial Alert ⚠️</span>
             </div>
-            <p class="text-sm text-slate-300">You're spending more than you earn. Consider reducing expenses.</p>
+            <p class="text-sm text-slate-300 mb-2">You're spending more than you earn. This is unsustainable long-term.</p>
+            <div class="text-xs text-slate-400">
+              <div class="flex justify-between">
+                <span>Deficit:</span>
+                <span class="text-red-400">₹{{ (total_expense - total_income)|round(2) }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AI Action Plan -->
+          <div class="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-3">
+            <div class="flex items-start space-x-2">
+              <span class="text-yellow-400 text-lg">🚀</span>
+              <div>
+                <p class="text-xs text-slate-300 font-medium">AI Action Plan:</p>
+                <p class="text-xs text-slate-400">1. Reduce non-essential expenses by 20%<br>2. Create emergency fund<br>3. Consider side income sources</p>
+              </div>
+            </div>
           </div>
         {% endif %}
       </div>
 
+      <!-- Smart Category Analysis -->
       <div class="space-y-4">
-        <h4 class="text-md font-semibold text-primary-400">Category Recommendations</h4>
+        <h4 class="text-md font-semibold text-primary-400 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clip-rule="evenodd"></path>
+          </svg>
+          Smart Category Analysis
+        </h4>
+        
         {% if top_categories is defined and top_categories %}
-        {% set top_category, top_amount = top_categories[0] %}
-        {% set top_percentage = (top_amount / total_expense * 100) if total_expense > 0 else 0 %}
-        {% if top_percentage > 30 %}
-          <div class="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-4">
-            <div class="flex items-center space-x-2 mb-2">
-              <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-yellow-400 font-medium">High Spending Alert</span>
+          {% for category, amount in top_categories[:3] %}
+          {% set percentage = (amount / total_expense * 100) if total_expense > 0 else 0 %}
+          <div class="{% if percentage > 30 %}bg-red-900/20 border-red-500/20{% elif percentage > 20 %}bg-yellow-900/20 border-yellow-500/20{% else %}bg-green-900/20 border-green-500/20{% endif %} border rounded-lg p-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium text-white">{{ category }}</span>
+              <span class="text-xs {% if percentage > 30 %}text-red-400{% elif percentage > 20 %}text-yellow-400{% else %}text-green-400{% endif %}">
+                {{ percentage|round(1) }}%
+              </span>
             </div>
-            <p class="text-sm text-slate-300">{{ top_category }} accounts for {{ top_percentage|round(1) }}% of your expenses. Consider reducing this category.</p>
+            
+            <!-- AI Category Insight -->
+            <div class="text-xs text-slate-400">
+              {% if percentage > 30 %}
+                <div class="flex items-start space-x-2">
+                  <span class="text-red-400">🔥</span>
+                  <p>High spending detected! Consider reducing this category by 15-20% to improve savings.</p>
+                </div>
+              {% elif percentage > 20 %}
+                <div class="flex items-start space-x-2">
+                  <span class="text-yellow-400">⚡</span>
+                  <p>Moderate spending. Look for optimization opportunities to save ₹{{ (amount * 0.1)|round(2) }} monthly.</p>
+                </div>
+              {% else %}
+                <div class="flex items-start space-x-2">
+                  <span class="text-green-400">✅</span>
+                  <p>Well controlled! This category is within healthy spending limits.</p>
+                </div>
+              {% endif %}
+            </div>
           </div>
-        {% endif %}
+          {% endfor %}
+          
+          <!-- AI Spending Pattern Analysis -->
+          <div class="bg-purple-900/20 border border-purple-500/20 rounded-lg p-3">
+            <div class="flex items-start space-x-2">
+              <span class="text-purple-400 text-lg">🧠</span>
+              <div>
+                <p class="text-xs text-slate-300 font-medium">AI Pattern Analysis:</p>
+                <p class="text-xs text-slate-400">
+                  {% set top_3_total = top_categories[:3]|sum(attribute=1) %}
+                  {% set top_3_percentage = (top_3_total / total_expense * 100) if total_expense > 0 else 0 %}
+                  Top 3 categories account for {{ top_3_percentage|round(1) }}% of expenses. 
+                  {% if top_3_percentage > 70 %}
+                    Consider diversifying spending across more categories.
+                  {% else %}
+                    Good spending distribution across categories.
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
         {% else %}
           <div class="bg-blue-900/20 border border-blue-500/20 rounded-lg p-4">
             <div class="flex items-center space-x-2 mb-2">
               <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-blue-400 font-medium">Get Started</span>
             </div>
-            <p class="text-sm text-slate-300">Add some transactions to get personalized category recommendations.</p>
+            <p class="text-sm text-slate-300">Add some transactions to unlock AI-powered category analysis and personalized recommendations.</p>
           </div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- AI Financial Health Score -->
+    <div class="mt-6 p-4 bg-gradient-to-r from-primary-900/20 to-purple-900/20 border border-primary-500/20 rounded-lg">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="text-md font-semibold text-primary-400">🤖 AI Financial Health Score</h4>
+        <div class="flex items-center space-x-2">
+          {% set health_score = 0 %}
+          {% if avg_monthly_savings > 0 %}{% set health_score = health_score + 30 %}{% endif %}
+          {% if savings_rate >= 20 %}{% set health_score = health_score + 25 %}{% endif %}
+          {% if top_categories and top_categories[0][1] / total_expense < 0.3 %}{% set health_score = health_score + 25 %}{% endif %}
+          {% if avg_monthly_savings > total_expense * 0.1 %}{% set health_score = health_score + 20 %}{% endif %}
+          
+          <span class="text-2xl font-bold {% if health_score >= 80 %}text-green-400{% elif health_score >= 60 %}text-yellow-400{% else %}text-red-400{% endif %}">
+            {{ health_score }}/100
+          </span>
+        </div>
+      </div>
+      
+      <div class="w-full bg-slate-700 rounded-full h-3 mb-2">
+        <div class="{% if health_score >= 80 %}bg-green-500{% elif health_score >= 60 %}bg-yellow-500{% else %}bg-red-500{% endif %} h-3 rounded-full transition-all duration-1000" style="width: {{ health_score }}%"></div>
+      </div>
+      
+      <div class="text-xs text-slate-400">
+        {% if health_score >= 80 %}
+          🎉 Excellent! Your financial habits are exemplary. Keep up the great work!
+        {% elif health_score >= 60 %}
+          👍 Good! You're on the right track with room for improvement.
+        {% else %}
+          🚨 Needs attention! Focus on building better financial habits.
         {% endif %}
       </div>
     </div>

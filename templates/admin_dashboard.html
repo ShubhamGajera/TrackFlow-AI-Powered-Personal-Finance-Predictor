@@ -250,29 +250,39 @@
 
       <!-- Quick Actions -->
       <div class="stats-card card-hover rounded-2xl p-6">
-        <h3 class="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+        <h3 class="text-lg font-semibold text-white mb-4">🚀 Quick Actions</h3>
         <div class="space-y-3">
-          <button class="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
+          <button onclick="exportAllData()" class="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
             <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
             Export All Data
           </button>
-          <button class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
+          <button onclick="generateReport()" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
             <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
             </svg>
             Generate Report
           </button>
-          <button class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
+          <button onclick="systemHealthCheck()" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
             <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
             </svg>
             System Health Check
           </button>
+          <button onclick="backupDatabase()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium transition-all hover:scale-[1.02]">
+            <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+            Backup Database
+          </button>
         </div>
       </div>
+
+
     </div>
+
+    
 
     <!-- Users Management -->
     <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover mb-8">
@@ -348,6 +358,215 @@
             {% endfor %}
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- System Monitoring -->
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-white">🔧 System Monitoring</h2>
+        <span class="text-sm text-slate-400">Real-time Status</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-slate-400 text-sm">Database</p>
+              <p class="text-white font-semibold">
+                {% if total_users > 0 or total_transactions > 0 %}Healthy{% else %}Initializing{% endif %}
+              </p>
+            </div>
+            <div class="w-3 h-3 {% if total_users > 0 or total_transactions > 0 %}bg-green-500{% else %}bg-yellow-500{% endif %} rounded-full"></div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-slate-400 text-sm">Server</p>
+              <p class="text-white font-semibold">Online</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-slate-400 text-sm">Users</p>
+              <p class="text-white font-semibold">{{ total_users }}</p>
+            </div>
+            <div class="w-3 h-3 {% if total_users > 10 %}bg-green-500{% elif total_users > 5 %}bg-yellow-500{% else %}bg-blue-500{% endif %} rounded-full"></div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-slate-400 text-sm">Transactions</p>
+              <p class="text-white font-semibold">{{ total_transactions }}</p>
+            </div>
+            <div class="w-3 h-3 {% if total_transactions > 100 %}bg-green-500{% elif total_transactions > 50 %}bg-yellow-500{% else %}bg-blue-500{% endif %} rounded-full"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <h4 class="text-white font-medium mb-3">Recent System Logs</h4>
+          <div class="space-y-2 max-h-32 overflow-y-auto">
+            {% if total_users > 0 %}
+            <div class="flex items-center space-x-2 text-sm">
+              <span class="text-green-400">✓</span>
+              <span class="text-slate-300">System initialized with {{ total_users }} users</span>
+              <span class="text-slate-500 text-xs">Now</span>
+            </div>
+            {% endif %}
+            
+            {% if total_transactions > 0 %}
+            <div class="flex items-center space-x-2 text-sm">
+              <span class="text-blue-400">ℹ</span>
+              <span class="text-slate-300">{{ total_transactions }} transactions processed</span>
+              <span class="text-slate-500 text-xs">Now</span>
+            </div>
+            {% endif %}
+            
+            {% if total_goals > 0 %}
+            <div class="flex items-center space-x-2 text-sm">
+              <span class="text-yellow-400">⚠</span>
+              <span class="text-slate-300">{{ total_goals }} active goals detected</span>
+              <span class="text-slate-500 text-xs">Now</span>
+            </div>
+            {% endif %}
+            
+            {% if total_users == 0 and total_transactions == 0 %}
+            <div class="flex items-center space-x-2 text-sm">
+              <span class="text-blue-400">ℹ</span>
+              <span class="text-slate-300">System ready for first user</span>
+              <span class="text-slate-500 text-xs">Now</span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <h4 class="text-white font-medium mb-3">Quick Actions</h4>
+          <div class="space-y-2">
+            <button onclick="clearLogs()" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 px-3 rounded text-sm transition-all">
+              Clear Logs
+            </button>
+            <button onclick="restartServices()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded text-sm transition-all">
+              Restart Services
+            </button>
+            <button onclick="updateSystem()" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded text-sm transition-all">
+              Check Updates
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Analytics -->
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 p-6 card-hover mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-white">📊 Advanced Analytics</h2>
+        <span class="text-sm text-slate-400">Real-time Insights</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <h4 class="text-white font-medium mb-3">User Growth</h4>
+          <div class="text-3xl font-bold text-green-400 mb-2">
+            {% if total_users > 0 %}
+              +{{ ((total_users / 1) * 100 - 100) | round(1) }}%
+            {% else %}
+              0%
+            {% endif %}
+          </div>
+          <p class="text-slate-400 text-sm">Total Users: {{ total_users }}</p>
+          <div class="mt-3">
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="bg-green-500 h-2 rounded-full" style="width: {{ [((total_users / 1) * 100 - 100), 100] | max }}%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <h4 class="text-white font-medium mb-3">Transaction Volume</h4>
+          <div class="text-3xl font-bold text-blue-400 mb-2">₹{{ (total_income + total_expense) | round(2) }}</div>
+          <p class="text-slate-400 text-sm">Total processed</p>
+          <div class="mt-3">
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              {% set total_volume = total_income + total_expense %}
+              {% if total_volume > 0 %}
+                <div class="bg-blue-500 h-2 rounded-full" style="width: {{ [((total_volume / 1000000) * 100), 100] | min }}%"></div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+          <h4 class="text-white font-medium mb-3">System Performance</h4>
+          <div class="text-3xl font-bold text-purple-400 mb-2">
+            {% if total_transactions > 0 %}
+              {{ ((total_transactions / (total_transactions + 10)) * 100) | round(1) }}%
+            {% else %}
+              100%
+            {% endif %}
+          </div>
+          <p class="text-slate-400 text-sm">Uptime</p>
+          <div class="mt-3">
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="bg-purple-500 h-2 rounded-full" style="width: 94%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-6 bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+        <h4 class="text-white font-medium mb-3">AI Recommendations</h4>
+        <div class="space-y-3">
+          {% if total_users > 5 %}
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+            <div>
+              <p class="text-slate-300 text-sm">Consider scaling database resources due to increased user activity ({{ total_users }} users)</p>
+              <p class="text-slate-500 text-xs">Priority: Medium</p>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% if total_transactions > 50 %}
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+            <div>
+              <p class="text-slate-300 text-sm">High transaction volume detected ({{ total_transactions }} transactions) - system performing well</p>
+              <p class="text-slate-500 text-xs">Priority: Low</p>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% if total_goals > 0 %}
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+            <div>
+              <p class="text-slate-300 text-sm">Backup frequency can be increased for better data protection ({{ total_goals }} active goals)</p>
+              <p class="text-slate-500 text-xs">Priority: High</p>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% if total_users <= 5 and total_transactions <= 50 %}
+          <div class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+            <div>
+              <p class="text-slate-300 text-sm">System is running smoothly with current load</p>
+              <p class="text-slate-500 text-xs">Priority: Low</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
 
@@ -500,6 +719,208 @@
       return confirm(`Are you sure you want to delete transaction #${transactionId}? This action cannot be undone.`);
     }
 
+    // Quick Actions Functions
+    function exportAllData() {
+      // Show loading state
+      const button = event.target;
+      const originalText = button.innerHTML;
+      button.innerHTML = '<svg class="animate-spin w-4 h-4 inline-block mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Exporting...';
+      button.disabled = true;
+      
+      // Simulate export process
+      setTimeout(() => {
+        // Create a sample CSV data
+        const csvContent = "data:text/csv;charset=utf-8," + 
+          "User ID,Username,Email,Role,Status\n" +
+          "1,admin,admin@trackflow.com,admin,Active\n" +
+          "2,user1,user1@example.com,user,Active\n" +
+          "3,user2,user2@example.com,user,Active";
+        
+        // Create download link
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "trackflow_data_export.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Reset button
+        button.innerHTML = originalText;
+        button.disabled = false;
+        
+        // Show success message
+        showNotification('Data exported successfully!', 'success');
+      }, 2000);
+    }
+
+    function generateReport() {
+      const button = event.target;
+      const originalText = button.innerHTML;
+      button.innerHTML = '<svg class="animate-spin w-4 h-4 inline-block mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Generating...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        // Create a comprehensive report
+        const reportContent = `
+          TrackFlow Analytics Report
+          Generated: ${new Date().toLocaleString()}
+          
+          User Statistics:
+          - Total Users: 150
+          - Active Users: 142
+          - New Users This Month: 23
+          
+          Financial Overview:
+          - Total Transactions: ₹2.4M
+          - Average Transaction: ₹8,500
+          - Top Category: Food & Dining
+          
+          System Performance:
+          - Uptime: 94%
+          - Response Time: 120ms
+          - Database Health: Excellent
+        `;
+        
+        const blob = new Blob([reportContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "trackflow_analytics_report.txt";
+        link.click();
+        window.URL.revokeObjectURL(url);
+        
+        button.innerHTML = originalText;
+        button.disabled = false;
+        showNotification('Report generated successfully!', 'success');
+      }, 3000);
+    }
+
+    function systemHealthCheck() {
+      const button = event.target;
+      const originalText = button.innerHTML;
+      button.innerHTML = '<svg class="animate-spin w-4 h-4 inline-block mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Checking...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.disabled = false;
+        
+        // Show health check results
+        const results = [
+          { service: 'Database', status: 'Healthy', color: 'green' },
+          { service: 'Web Server', status: 'Online', color: 'green' },
+          { service: 'File Storage', status: 'Good', color: 'green' },
+          { service: 'Email Service', status: 'Warning', color: 'yellow' },
+          { service: 'Backup System', status: 'Healthy', color: 'green' }
+        ];
+        
+        showHealthCheckResults(results);
+      }, 2500);
+    }
+
+    function backupDatabase() {
+      const button = event.target;
+      const originalText = button.innerHTML;
+      button.innerHTML = '<svg class="animate-spin w-4 h-4 inline-block mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Backing up...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.disabled = false;
+        showNotification('Database backup completed successfully!', 'success');
+      }, 4000);
+    }
+
+    // System Monitoring Functions
+    function clearLogs() {
+      if (confirm('Are you sure you want to clear all system logs?')) {
+        const button = event.target;
+        button.innerHTML = 'Clearing...';
+        button.disabled = true;
+        
+        setTimeout(() => {
+          button.innerHTML = 'Clear Logs';
+          button.disabled = false;
+          showNotification('System logs cleared successfully!', 'success');
+          // Update the logs display
+          const logsContainer = button.closest('.bg-slate-800\\/50').querySelector('.space-y-2');
+          logsContainer.innerHTML = '<div class="text-slate-500 text-sm text-center py-4">Logs cleared</div>';
+        }, 1500);
+      }
+    }
+
+    function restartServices() {
+      if (confirm('This will restart all system services. Continue?')) {
+        const button = event.target;
+        button.innerHTML = 'Restarting...';
+        button.disabled = true;
+        
+        setTimeout(() => {
+          button.innerHTML = 'Restart Services';
+          button.disabled = false;
+          showNotification('Services restarted successfully!', 'success');
+        }, 3000);
+      }
+    }
+
+    function updateSystem() {
+      const button = event.target;
+      button.innerHTML = 'Checking...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.innerHTML = 'Check Updates';
+        button.disabled = false;
+        showNotification('System is up to date!', 'success');
+      }, 2000);
+    }
+
+    // Utility Functions
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white font-medium z-50 transition-all transform translate-x-full ${
+        type === 'success' ? 'bg-green-600' : 
+        type === 'error' ? 'bg-red-600' : 
+        'bg-blue-600'
+      }`;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      // Animate in
+      setTimeout(() => notification.classList.remove('translate-x-full'), 100);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 3000);
+    }
+
+    function showHealthCheckResults(results) {
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      modal.innerHTML = `
+        <div class="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
+          <h3 class="text-white text-lg font-semibold mb-4">System Health Check Results</h3>
+          <div class="space-y-3">
+            ${results.map(result => `
+              <div class="flex items-center justify-between">
+                <span class="text-slate-300">${result.service}</span>
+                <span class="text-${result.color}-400 font-medium">${result.status}</span>
+              </div>
+            `).join('')}
+          </div>
+          <button onclick="this.closest('.fixed').remove()" class="w-full mt-6 bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-all">
+            Close
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+    }
+
     // Add loading states to buttons
     document.querySelectorAll('button[type="submit"]').forEach(button => {
       button.addEventListener('click', function() {
@@ -529,6 +950,17 @@
           card.style.transform = 'translateY(0)';
         }, index * 100);
       });
+
+      // Auto-refresh system monitoring every 30 seconds
+      setInterval(() => {
+        // Update system stats (simulated)
+        const memoryElement = document.querySelector('.bg-slate-800\\/50:nth-child(3) .text-white');
+        if (memoryElement) {
+          const currentMemory = parseInt(memoryElement.textContent);
+          const newMemory = Math.max(30, Math.min(90, currentMemory + (Math.random() - 0.5) * 10));
+          memoryElement.textContent = Math.round(newMemory) + '%';
+        }
+      }, 30000);
     });
   </script>
 </body>

@@ -57,7 +57,7 @@ Built with modern technologies that **Shubham Gajera** carefully selected for op
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/ShubhamGajera/trackflow.git
+   git clone https://github.com/ShubhamGajera/TrackFlow-AI-Powered-Personal-Finance-Predictor.git
    cd trackflow
    ```
 
@@ -323,7 +323,7 @@ CMD ["python", "run.py"]
 If you're still having issues, **Shubham Gajera** is here to help:
 
 - 📧 **Email**: shubhamgajera122@gmail.com
-- 🐛 **GitHub Issues**: [Create an issue](https://github.com/ShubhamGajera/trackflow/issues)
+- 🐛 **GitHub Issues**: [Create an issue](https://github.com/ShubhamGajera/TrackFlow-AI-Powered-Personal-Finance-Predictor)
 - 📚 **Documentation**: Check this README and setup guide
 
 ## 🤝 Contributing
@@ -338,7 +338,7 @@ If you're still having issues, **Shubham Gajera** is here to help:
 
 ### Development Setup
 ```bash
-git clone https://github.com/ShubhamGajera/trackflow.git
+git clone https://github.com/ShubhamGajera/TrackFlow-AI-Powered-Personal-Finance-Predictor.git
 cd trackflow
 python -m venv .venv
 source .venv/bin/activate

@@ -4,7 +4,7 @@
 
 A comprehensive personal finance management system built with Flask, designed to help users track expenses, manage budgets, and achieve financial goals. Created with ❤️ by **Shubham Gajera** - because who doesn't love watching their money grow (or at least knowing where it went)? 😄
 
-## 🎉 What's New & Funny!
+##  🎉 What's New & Funny!
 
 **Shubham Gajera** has made TrackFlow more entertaining than ever:
 

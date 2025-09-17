@@ -154,7 +154,7 @@ Our database is designed with love by **Shubham Gajera** to handle all your fina
 - `achieved`: Currently achieved amount
 - `monthly_savings_target`: Monthly savings target
 
-## 🔐 Authentication & Security
+## 🔐Authentication & Security
 
 > *"Security is like a good password - you don't realize how important it is until it's too late!"* 🔒
 

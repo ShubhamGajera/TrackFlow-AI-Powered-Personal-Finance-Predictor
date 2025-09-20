@@ -8,7 +8,7 @@ A comprehensive personal finance management system built with Flask, designed to
 
 **Shubham Gajera** has made TrackFlow more entertaining than ever:
 
-- 🎭 **Funny Developer Section**: Learn about the developer with hilarious anecdotes
+- 🎭 **Funny Developer Section**: Learn about the developer with hilarious Anecdotes
 - 😂 **Humorous Messages**: Dashboard welcomes you with motivational (and funny) messages
 - 🎨 **Entertaining UI**: Fun elements throughout the interface
 - 🍵 **Tea References**: Because tea fuels better code than coffee! ☕

@@ -2,7 +2,7 @@
 
 > *"Money talks, but TrackFlow listens and helps you make it sing!"*
 
-A comprehensive personal finance management system built with Flask, designed to help users track expenses, manage budgets, and achieve financial goals. Created with ❤️ by **Shubham Gajera** - because who doesn't love watching their money grow (or at least knowing where it went)? 😄
+A comprehensive personal finance management system built with Flask, designed to help users track expenses, manage budgets, and achieve financial goals. Created with ❤️ by **Shubham Gajera** - because who doesn't love watching their money grow (or at least knowing where it went)?  😄
 
 ##  🎉 What's New & Funny!
 

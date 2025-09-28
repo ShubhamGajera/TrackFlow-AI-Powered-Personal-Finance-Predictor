@@ -19,7 +19,7 @@ A comprehensive personal finance management system built with Flask, designed to
 
 ## 🌟 Features
 
-TrackFlow comes packed with powerful features to make your Financial journey smooth and enjoyable:
+TrackFlow comes packed with powerful features to make your Financial journey smooth and Enjoyable:
 
 - **💰 Transaction Management**: Track income and expenses with detailed categorization
 - **🎯 Goal Setting**: Set and monitor financial goals with progress tracking
